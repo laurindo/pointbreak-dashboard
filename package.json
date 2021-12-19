@@ -13,7 +13,6 @@
     "circular": "madge --circular src --extensions ts,tsx,js,jsx",
     "unused": "next-unused",
     "prepare": "husky install",
-    "pre-commit": "lint-staged",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
     "lint": "next lint",
     "test": "jest",
@@ -177,5 +176,16 @@
     "not ie 11",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "firebase": "8.10.0",
+    "firebase-admin": "9.11.1",
+    "next-firebase-auth": "^0.13.5",
+    "react-bootstrap": "^2.0.3",
+    "react-slick": "^0.28.1",
+    "react-tradingview-widget": "^1.3.2",
+    "sass": "^1.45.0",
+    "slick-carousel": "^1.8.1"
+  }
 }

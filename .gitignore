@@ -22,6 +22,7 @@ public/workbox*.js.map
 /locale/**/*.js
 
 .env
+.env.local
 
 lokalise.yaml
 

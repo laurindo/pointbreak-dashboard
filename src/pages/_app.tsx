@@ -1,4 +1,9 @@
 import '../bootstrap'
+
+import '../../assets/css/ionicons.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../../assets/scss/style.scss'
+
 import '../styles/index.css'
 
 import * as plurals from 'make-plural/plurals'
@@ -29,6 +34,10 @@ import { nanoid } from '@reduxjs/toolkit'
 import { remoteLoader } from '@lingui/remote-loader'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import initAuth from '@/services/init-auth'
+import { AuthProvider } from '@/contexts/AuthContext'
+
+initAuth()
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
 
@@ -149,32 +158,34 @@ function MyApp({
           content="Be a DeFi Chef with Sushi. Swap, earn, stack yields, lend, borrow, leverage all on one decentralized, community driven platform. Welcome home to DeFi"
         />
       </Head>
-      <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ReactManager>
-              <ReduxProvider store={store}>
-                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                  <>
-                    <ListsUpdater />
-                    <UserUpdater />
-                    <ApplicationUpdater />
-                    <TransactionUpdater />
-                    <MulticallUpdater />
-                  </>
-                  <Provider>
-                    <Layout>
-                      <Guard>
-                        <Component {...pageProps} />
-                      </Guard>
-                    </Layout>
-                  </Provider>
-                </PersistGate>
-              </ReduxProvider>
-            </Web3ReactManager>
-          </Web3ProviderNetwork>
-        </Web3ReactProvider>
-      </I18nProvider>
+      <AuthProvider>
+        <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
+          <Web3ReactProvider getLibrary={getLibrary}>
+            <Web3ProviderNetwork getLibrary={getLibrary}>
+              <Web3ReactManager>
+                <ReduxProvider store={store}>
+                  <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
+                    <>
+                      <ListsUpdater />
+                      <UserUpdater />
+                      <ApplicationUpdater />
+                      <TransactionUpdater />
+                      <MulticallUpdater />
+                    </>
+                    <Provider>
+                      <Layout>
+                        <Guard>
+                          <Component {...pageProps} />
+                        </Guard>
+                      </Layout>
+                    </Provider>
+                  </PersistGate>
+                </ReduxProvider>
+              </Web3ReactManager>
+            </Web3ProviderNetwork>
+          </Web3ReactProvider>
+        </I18nProvider>
+      </AuthProvider>
     </Fragment>
   )
 }

@@ -33,14 +33,22 @@ function AppBar(): JSX.Element {
       <Popover as="nav" className="z-10 w-full bg-transparent header-border-b">
         {({ open }) => (
           <>
-            <div className="px-4 py-4">
+            <div className="px-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Image src="/logo.png" alt="Sushi" width="32px" height="32px" />
+                  <Image src="/logo-horizontal.png" alt="PointBreak" width="128px" height="32px" />
                   <div className="hidden sm:block sm:ml-4">
                     <div className="flex space-x-2">
                       {/* <Buy /> */}
-                      <NavLink href="/swap">
+                      <NavLink href="/">
+                        <a
+                          id={`swap-nav-link`}
+                          className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
+                        >
+                          {i18n._(t`Home`)}
+                        </a>
+                      </NavLink>
+                      {/*<NavLink href="/swap">
                         <a
                           id={`swap-nav-link`}
                           className="p-2 text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
@@ -95,7 +103,7 @@ function AppBar(): JSX.Element {
                             {i18n._(t`Stake`)}
                           </a>
                         </NavLink>
-                      )}
+                      )}*/}
                     </div>
                   </div>
                 </div>
@@ -213,9 +221,10 @@ function AppBar(): JSX.Element {
                     <div className="hidden md:block">
                       <LanguageSwitch />
                     </div>
-                    <More />
+                    {/*<More />*/}
                   </div>
                 </div>
+
                 <div className="flex -mr-2 sm:hidden">
                   {/* Mobile menu button */}
                   <div className="block mr-2 md:hidden">
