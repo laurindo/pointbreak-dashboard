@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const MyChart = dynamic(() => import('./TradingChartDark.tsx'), { ssr: false })
+const MyChart = dynamic(() => import('./TradingChartDark'), { ssr: false })
 
 export default function DynamicTVS() {
   return (
