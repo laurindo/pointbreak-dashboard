@@ -1,5 +1,3 @@
-import Drawer from '@/components/Drawer'
-
 import { useAuthUser, withAuthUser, withAuthUserTokenSSR, AuthAction } from 'next-firebase-auth'
 
 const MyLoader = () => <div>Loading...</div>
@@ -7,7 +5,7 @@ const MyLoader = () => <div>Loading...</div>
 function Future() {
   const AuthUser = useAuthUser()
 
-  return <>{AuthUser.email && <Drawer />}</>
+  return <>{AuthUser.email && <div />}</>
 }
 
 export const getServerSideProps = withAuthUserTokenSSR()()

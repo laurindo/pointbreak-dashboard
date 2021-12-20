@@ -1,6 +1,5 @@
-import Drawer from '@/components/Drawer'
-import { initializeApollo } from '@/services/apollo'
-import { CURRENT_ORDER } from '@/graphql/queries'
+//import { initializeApollo } from '@/services/apollo'
+// import { CURRENT_ORDER } from '@/graphql/queries'
 
 import { useAuthUser, withAuthUser, withAuthUserTokenSSR, AuthAction } from 'next-firebase-auth'
 
@@ -11,17 +10,22 @@ function Spot(props) {
 
   const AuthUser = useAuthUser()
 
-  return <>{AuthUser.email && <Drawer />}</>
+  return <>{AuthUser.email && <div />}</>
 }
 
 export async function getServerSideProps() {
   withAuthUserTokenSSR()
-  const apolloClient = initializeApollo()
+  // const apolloClient = initializeApollo()
 
-  const { data } = await apolloClient.query({ query: CURRENT_ORDER })
+  // const { data } = await apolloClient.query({ query: CURRENT_ORDER })
+
+  // original
+  /*return {
+    props: { data: data, initialApolloState: apolloClient.cache.extract() },
+  }*/
 
   return {
-    props: { data: data, initialApolloState: apolloClient.cache.extract() },
+    props: { data: [], initialApolloState: [] },
   }
 }
 
