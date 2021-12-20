@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
 
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import CircularProgress from '@mui/material/CircularProgress'
-import Typography from '@mui/material/Typography'
-import Alert from '@mui/material/Alert'
-import Stack from '@mui/material/Stack'
+// import Button from '@mui/material/Button'
+// import TextField from '@mui/material/TextField'
+// import CircularProgress from '@mui/material/CircularProgress'
+// import Typography from '@mui/material/Typography'
+// import Alert from '@mui/material/Alert'
+// import Stack from '@mui/material/Stack'
 
 import useAuth from '@/hooks/useAuth'
 
@@ -39,7 +39,7 @@ function Login() {
   }, [user])
 
   if (isLoading) {
-    return <CircularProgress />
+    //return <CircularProgress />
   }
 
   return (
@@ -55,7 +55,7 @@ function Login() {
           flexDirection: 'column',
         }}
       >
-        <Stack spacing={4}>
+        {/*<Stack spacing={4}>
           <Typography variant="h3" gutterBottom component="div">
             ExchangeHelio
           </Typography>
@@ -83,7 +83,7 @@ function Login() {
           <Button variant="contained" onClick={handleSignin}>
             Signin
           </Button>
-        </div>
+        </div>*/}
       </div>
     </div>
   )
