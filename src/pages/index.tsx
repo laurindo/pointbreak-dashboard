@@ -14,38 +14,43 @@ import DynamicTVSDark from '../components/DynamicTVSDark'
 import { useActiveWeb3React } from '../services/web3'
 import useBalance from '@/hooks/useBalance'
 
+import client from '../services/apollo'
+import { ApolloProvider } from '@apollo/client'
+
 export default function Dashboard() {
   const { account } = useActiveWeb3React()
   const balance = useBalance(account)
 
   return (
-    <Container id="dashboard-page" className="py-4 md:py-8 lg:py-12" maxWidth="7xl">
-      <Head>
-        <title>Dashboard | Pointbreak</title>
-        <meta name="description" content="Pointbreak" />
-      </Head>
-      <Layout>
-        <div className="container-fluid mtb15 no-fluid">
-          <div className="row sm-gutters">
-            <div className="col-sm-12 col-md-3">
-              <OrderBook />
-              <MarketHistory />
-            </div>
+    <ApolloProvider client={client}>
+      <Container id="dashboard-page" className="py-4 md:py-8 lg:py-12" maxWidth="7xl">
+        <Head>
+          <title>Dashboard | Pointbreak</title>
+          <meta name="description" content="Pointbreak" />
+        </Head>
+        <Layout>
+          <div className="container-fluid mtb15 no-fluid">
+            <div className="row sm-gutters">
+              <div className="col-sm-12 col-md-3">
+                <OrderBook />
+                <MarketHistory />
+              </div>
 
-            <div className="col-sm-12 col-md-6">
-              <DynamicTVSDark />
-              <MarketTrade />
-            </div>
+              <div className="col-sm-12 col-md-6">
+                <DynamicTVSDark />
+                <MarketTrade />
+              </div>
 
-            <div className="col-md-3">
-              <MarketPairs />
-            </div>
-            <div className="col-md-12">
-              <HistoryOrder />
+              <div className="col-md-3">
+                <MarketPairs />
+              </div>
+              <div className="col-md-12">
+                <HistoryOrder />
+              </div>
             </div>
           </div>
-        </div>
-      </Layout>
-    </Container>
+        </Layout>
+      </Container>
+    </ApolloProvider>
   )
 }

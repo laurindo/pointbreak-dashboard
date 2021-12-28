@@ -1,7 +1,12 @@
 import React from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 
+import { useQuery } from '@apollo/client'
+import { RECENT_TRADE_LIST } from '../graphql/queries/index'
+
 export default function MarketHistory() {
+  const { data } = useQuery(RECENT_TRADE_LIST)
+  const list = data?.recentTradeList.list
   return (
     <div className="market-history">
       <Tabs defaultActiveKey="recent-trades">
@@ -10,81 +15,20 @@ export default function MarketHistory() {
             <thead>
               <tr>
                 <th>Time</th>
-                <th>Price(BTC)</th>
-                <th>Amount(ETH)</th>
+                <th>Price(BTC)</th> {/* Tornar o symbol dinâmico */}
+                <th>Amount(ETH)</th> {/* Tornar o symbol dinâmico */}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="green">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
-              <tr>
-                <td>13:03:53</td>
-                <td className="red">0.020191</td>
-                <td>0.2155045</td>
-              </tr>
+              {list?.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>1{item.time}</td>
+                    <td className="red">{item.price}</td>
+                    <td>{item.qty}</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </Tab>

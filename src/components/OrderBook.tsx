@@ -1,6 +1,9 @@
 import React from 'react'
+import { useQuery } from '@apollo/client'
+import { CURRENT_ORDER } from '../graphql/queries/index'
 
 export default function OrderBook() {
+  const { data } = useQuery(CURRENT_ORDER)
   return (
     <div className="order-book mb15">
       <h2 className="heading">Order Book</h2>
@@ -13,12 +16,14 @@ export default function OrderBook() {
           </tr>
         </thead>
         <tbody>
-          <tr className="red-bg-80">
-            <td className="red">0.022572</td>
-            <td>1.253415</td>
-            <td>15.27648</td>
-          </tr>
-          <tr className="red-bg-60">
+          {data?.currentOrder.asks.map((item) => (
+            <tr className="red-bg-80" key={item}>
+              <td className="red">{item[0]}</td>
+              <td>{item[1]}</td>
+              <td>{item[0]}</td>
+            </tr>
+          ))}
+          {/* <tr className="red-bg-60">
             <td className="red">0.020371</td>
             <td>1.205415</td>
             <td>15.25648</td>
@@ -52,7 +57,7 @@ export default function OrderBook() {
             <td className="red">0.028576</td>
             <td>1.291415</td>
             <td>15.26448</td>
-          </tr>
+          </tr> */}
         </tbody>
         <tbody className="ob-heading">
           <tr>
