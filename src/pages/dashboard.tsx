@@ -1,5 +1,7 @@
 import { Box, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+
 import { Header } from '../components/Header';
+import { HeaderPairs } from '../components/HeaderPairs';
 
 export default function Dashboard() {
   return (
@@ -14,14 +16,7 @@ export default function Dashboard() {
         mx="auto"
         px="6"
       >
-        <GridItem
-          w="100%"
-          h="10"
-          colSpan={3}
-          bg="gray.800"
-          borderColor="gray.700"
-          borderWidth="1px"
-        ></GridItem>
+        <HeaderPairs />
         <GridItem
           w="100%"
           h="20"
