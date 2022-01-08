@@ -1,27 +1,10 @@
-import {
-  Flex,
-  Text,
-  Icon,
-  HStack,
-  Box,
-  Avatar,
-  Image,
-  Link,
-  GridItem,
-  Stack,
-} from '@chakra-ui/react';
+import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
 
+// Todo: Renomear o nome deste componente
 export function HeaderPairs() {
   return (
-    <GridItem
-      w="100%"
-      h="20"
-      colSpan={3}
-      bg="gray.800"
-      borderColor="gray.700"
-      borderWidth="1px"
-    >
+    <Flex w="100%" borderWidth={1} borderColor="gray.700">
       <Flex h="20" align="center">
         <HStack
           spacing="8"
@@ -99,6 +82,6 @@ export function HeaderPairs() {
           </Flex>
         </HStack>
       </Flex>
-    </GridItem>
+    </Flex>
   );
 }

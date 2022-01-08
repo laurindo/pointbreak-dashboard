@@ -1,50 +1,39 @@
 import { Box, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { GraficTrade } from '../components/GraficTrade';
 
 import { Header } from '../components/Header';
 import { HeaderPairs } from '../components/HeaderPairs';
+import { MarketPairs } from '../components/MarketPairs';
+import { OrderBook } from '../components/OrderBook';
 
 export default function Dashboard() {
   return (
     <Flex direction="column" h="100vh">
       <Header />
-      <Grid
+      <Flex
         width="100%"
+        marginX="auto"
+        marginTop="4"
+        paddingX="6"
         maxWidth={1480}
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(4, 1fr)"
-        my="6"
-        mx="auto"
-        px="6"
+        borderWidth={1}
+        borderColor="red.700"
       >
-        <HeaderPairs />
-        <GridItem
-          w="100%"
-          h="20"
-          bg="gray.800"
-          colSpan={1}
-          rowSpan={2}
-          borderColor="gray.700"
-          borderWidth="1px"
+        <Flex
+          direction="column"
+          width="100%"
+          maxWidth={1110}
+          borderWidth={1}
+          borderColor="yellow.700"
         >
-          Teste
-        </GridItem>
-        <GridItem
-          w="100%"
-          h="10"
-          bg="gray.800"
-          colSpan={1}
-          borderColor="gray.700"
-          borderWidth="1px"
-        ></GridItem>
-        <GridItem
-          w="100%"
-          h="10"
-          bg="gray.800"
-          colSpan={2}
-          borderColor="gray.700"
-          borderWidth="1px"
-        ></GridItem>
-      </Grid>
+          <HeaderPairs />
+          <Flex w="100%" borderWidth={1} borderColor="gray.700">
+            <OrderBook />
+            <GraficTrade />
+          </Flex>
+        </Flex>
+        <MarketPairs />
+      </Flex>
     </Flex>
   );
 }
