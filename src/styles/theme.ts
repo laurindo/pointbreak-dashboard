@@ -3,6 +3,9 @@ import { extendTheme } from '@chakra-ui/react';
 export const theme = extendTheme({
   // If you want use others color who not Chakra's default
   colors: {
+    yellow: {
+      '900': 'rgb(252, 213, 53)'
+    },
     gray: {
       '900': '#161A1E',
       '800': '#1E2026',

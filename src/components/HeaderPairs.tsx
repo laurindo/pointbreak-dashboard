@@ -1,8 +1,11 @@
 import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
+import useTickerPrice from '@/hooks/useTickerPrice';
 
 // Todo: Renomear o nome deste componente
 export function HeaderPairs() {
+  const tickerPrice = useTickerPrice('btcusdt');
+
   return (
     <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">
       <Flex h="20" align="center">
@@ -29,8 +32,8 @@ export function HeaderPairs() {
         <HStack spacing="8">
           <Flex align="center">
             <Box textAlign="center">
-              <Text fontSize="medium">41,795.14</Text>
-              <Text fontSize="small">$41,812.57</Text>
+              <Text fontSize="medium">{tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}</Text>
+              <Text fontSize="small">$ {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}</Text>
             </Box>
           </Flex>
 
@@ -50,7 +53,7 @@ export function HeaderPairs() {
               <Text color="gray.300" fontSize="small">
                 Máximo em 24h
               </Text>
-              <Text fontSize="small">0.5221</Text>
+              <Text fontSize="small">{tickerPrice?.h ? Number(tickerPrice.h).toFixed(2) : 0}</Text>
             </Box>
           </Flex>
 
@@ -59,7 +62,7 @@ export function HeaderPairs() {
               <Text color="gray.300" fontSize="small">
                 Mínimo em 24h
               </Text>
-              <Text fontSize="small">0.4916</Text>
+              <Text fontSize="small">{tickerPrice?.l ? Number(tickerPrice.l).toFixed(2) : 0}</Text>
             </Box>
           </Flex>
 
