@@ -8,14 +8,14 @@ import { OrderBook } from '../components/OrderBook';
 
 export default function Dashboard() {
   return (
-    <Flex direction="column" h="100vh">
+    <Flex direction="column" height="100vh">
       <Header />
       <Flex
         width="100%"
         marginX="auto"
         marginTop="4"
         paddingX="6"
-        maxWidth={1480}
+        maxWidth={1520}
       >
         <Flex
           direction="column"
@@ -25,7 +25,7 @@ export default function Dashboard() {
           borderColor="gray.700"
         >
           <HeaderPairs />
-          <Flex w="100%">
+          <Flex width="100%">
             <OrderBook />
             <GraficTrade />
           </Flex>

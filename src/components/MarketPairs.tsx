@@ -11,8 +11,8 @@ import {
 export function MarketPairs() {
   return (
     <Flex
-      w="100%"
-      maxWidth={370}
+      width="100%"
+      maxWidth={320}
       borderTopWidth={1}
       borderBottomWidth={1}
       borderRightWidth={1}

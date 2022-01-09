@@ -8,7 +8,7 @@ export function OrderBook() {
     <Flex
       direction="column"
       width="100%"
-      maxWidth={370}
+      maxWidth={320}
       borderRightWidth={1}
       borderColor="gray.700"
     >

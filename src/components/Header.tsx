@@ -21,7 +21,7 @@ export function Header() {
       px="6"
       as="header"
       align="center"
-      maxWidth={1480}
+      maxWidth={1520}
     >
       <Text
         fontSize="3xl"
