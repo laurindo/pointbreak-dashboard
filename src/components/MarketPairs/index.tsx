@@ -6,7 +6,12 @@ import {
   Box,
   Link,
   GridItem,
+  Input,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
+
+import { SearchInMarkerPairs } from './SearchInMarkerPairs';
 
 export function MarketPairs() {
   return (
@@ -18,7 +23,7 @@ export function MarketPairs() {
       borderRightWidth={1}
       borderColor="gray.700"
     >
-      Market Pair
+      <SearchInMarkerPairs />
     </Flex>
   );
 }
