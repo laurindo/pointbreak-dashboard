@@ -16,18 +16,16 @@ export default function Dashboard() {
         marginTop="4"
         paddingX="6"
         maxWidth={1480}
-        borderWidth={1}
-        borderColor="red.700"
       >
         <Flex
           direction="column"
           width="100%"
           maxWidth={1110}
           borderWidth={1}
-          borderColor="yellow.700"
+          borderColor="gray.700"
         >
           <HeaderPairs />
-          <Flex w="100%" borderWidth={1} borderColor="gray.700">
+          <Flex w="100%">
             <OrderBook />
             <GraficTrade />
           </Flex>

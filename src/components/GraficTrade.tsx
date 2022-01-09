@@ -9,9 +9,5 @@ import {
 } from '@chakra-ui/react';
 
 export function GraficTrade() {
-  return (
-    <Flex w="100%" borderWidth={1} borderColor="gray.700">
-      Grafic Trade
-    </Flex>
-  );
+  return <Flex w="100%">Grafic Trade</Flex>;
 }

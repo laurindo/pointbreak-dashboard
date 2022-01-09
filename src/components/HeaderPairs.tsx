@@ -4,7 +4,7 @@ import { RiCoinsLine } from 'react-icons/ri';
 // Todo: Renomear o nome deste componente
 export function HeaderPairs() {
   return (
-    <Flex w="100%" borderWidth={1} borderColor="gray.700">
+    <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">
       <Flex h="20" align="center">
         <HStack
           spacing="8"
