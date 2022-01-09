@@ -10,7 +10,7 @@ import { RiSearchLine } from 'react-icons/ri';
 
 export function SearchInMarkerPairs() {
   return (
-    <Flex width="100%" margin="4">
+    <Flex height="10" marginY={3}>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"

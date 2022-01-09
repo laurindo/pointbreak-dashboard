@@ -14,11 +14,11 @@ import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
 export function Header() {
   return (
     <Flex
-      w="100%"
-      h="20"
-      mx="auto"
-      mt="4"
-      px="6"
+      width="100%"
+      height="20"
+      marginX="auto"
+      marginTop="4"
+      paddingX="6"
       as="header"
       align="center"
       maxWidth={1520}
@@ -27,7 +27,7 @@ export function Header() {
         fontSize="3xl"
         fontWeight="bold"
         letterSpacing="tight"
-        w="64"
+        width="64"
         color="yellow.500"
       >
         <NextLink href="/dashboard" passHref>
