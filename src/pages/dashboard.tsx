@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { GraficTrade } from '../components/GraficTrade';
 
 import { Header } from '../components/Header';
