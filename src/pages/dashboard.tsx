@@ -5,6 +5,7 @@ import { Header } from '../components/Header';
 import { HeaderPairs } from '../components/HeaderPairs';
 import { MarketPairs } from '../components/MarketPairs';
 import { OrderBook } from '../components/OrderBook';
+import { WalletSpot } from '../components/WalletSpot';
 
 export default function Dashboard() {
   return (
@@ -27,7 +28,10 @@ export default function Dashboard() {
           <HeaderPairs />
           <Flex width="100%">
             <OrderBook />
-            <GraficTrade />
+            <Flex width="100%" direction="column">
+              <GraficTrade />
+              <WalletSpot />
+            </Flex>
           </Flex>
         </Flex>
         <MarketPairs />
