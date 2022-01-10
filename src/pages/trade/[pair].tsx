@@ -1,29 +1,42 @@
-import { Flex, Button, Stack } from '@chakra-ui/react';
-import { Input } from '@/components/Form/Input';
+import { Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { Header } from '@/components/Header';
+import { HeaderPairs } from '@/components/HeaderPairs';
+import { OrderBook } from '@/components/OrderBook';
+import { TradingViewChart } from '@/components/TradingViewChart';
+import { WalletSpot } from '@/components/WalletSpot';
+import { MarketPairs } from '@/components/MarketPairs';
 
 export default function Pair() {
   const router = useRouter();
-  console.log(router.query.pair);
+  console.log(`PAIR: ${router.query.pair}`);
   return (
-    <Flex w="100vw" h="100vh" align="center" justify="center">
+    <Flex direction="column" height="100vh">
+      <Header />
       <Flex
-        as="form"
         width="100%"
-        maxWidth={360}
-        bg="gray.800"
-        p="8"
-        borderRadius={8}
-        flexDir="column"
+        marginX="auto"
+        marginTop="4"
+        paddingX="6"
+        maxWidth={1520}
       >
-        <Stack spacing={4}>
-          <Input name="email" type="email" label="Email" />
-          <Input name="password" type="password" label="Password" />
-        </Stack>
-
-        <Button type="submit" mt={6} colorScheme="pink" size="lg">
-          Entrar
-        </Button>
+        <Flex
+          direction="column"
+          width="100%"
+          maxWidth={1110}
+          borderWidth={1}
+          borderColor="gray.700"
+        >
+          <HeaderPairs pair={String(router.query.pair)} />
+          <Flex width="100%">
+            <OrderBook />
+            <Flex width="100%" direction="column">
+              <TradingViewChart />
+              <WalletSpot />
+            </Flex>
+          </Flex>
+        </Flex>
+        <MarketPairs />
       </Flex>
     </Flex>
   );

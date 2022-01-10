@@ -30,7 +30,7 @@ export function LimitFormCollumn({
           <InputWallet
             textLeft="Price"
             textRight={criptoFrom}
-            // value="0,000123"
+            value="0.000123"
           />
           <InputWallet textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />

@@ -21,10 +21,11 @@ export function InputWallet({
   disabled,
   type = 'number',
 }: InputWalletProps) {
-  const [valueInput, setValueInput] = React.useState(value);
-  const handleChange = (event) => setValueInput(event.target.value);
+  const valuePassedOnInput =
+    value && type == 'number' ? parseFloat(value.replace(',', '.')) : value;
 
-  console.log(valueInput);
+  const [valueInput, setValueInput] = React.useState(valuePassedOnInput);
+  const handleChange = (event) => setValueInput(event.target.value);
 
   return (
     <InputGroup size="md">
