@@ -9,6 +9,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { LimitFormCollumn } from './LimitFormCollumn';
+import { MarketFormCollumn } from './MarketFormCollumn';
 
 export function WalletSpot() {
   return (
@@ -56,7 +57,22 @@ export function WalletSpot() {
               />
             </HStack>
           </TabPanel>
-          <TabPanel>Market Order</TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <MarketFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <MarketFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
           <TabPanel>Stop-Limit</TabPanel>
           <TabPanel>OCO</TabPanel>
         </TabPanels>

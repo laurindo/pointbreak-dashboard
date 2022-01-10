@@ -13,12 +13,13 @@ export function SliderWallet() {
   const [sliderValue, setSliderValue] = React.useState(5);
   const [showTooltip, setShowTooltip] = React.useState(false);
   return (
-    <Flex height={5}>
+    <Flex>
       <Slider
         id="slider"
         defaultValue={5}
         min={0}
         max={100}
+        marginY="2"
         colorScheme="teal"
         onChange={(v) => setSliderValue(v)}
         onMouseEnter={() => setShowTooltip(true)}
