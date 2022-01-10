@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { LimitFormCollumn } from './LimitFormCollumn';
 import { MarketFormCollumn } from './MarketFormCollumn';
+import { StopLimitFormCollumn } from './StopLimitFormCollumn';
 
 export function WalletSpot() {
   return (
@@ -73,7 +74,22 @@ export function WalletSpot() {
               />
             </HStack>
           </TabPanel>
-          <TabPanel>Stop-Limit</TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <StopLimitFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <StopLimitFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
           <TabPanel>OCO</TabPanel>
         </TabPanels>
       </Tabs>

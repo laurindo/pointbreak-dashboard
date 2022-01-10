@@ -1,20 +1,22 @@
 import { Button, Flex, Stack, Text } from '@chakra-ui/react';
+
 import { InputWallet } from '../Form/InputWallet';
 import { SliderWallet } from './SliderWallet';
+import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
 
-interface MarketFormCollumnProps {
+interface StopLimitFormCollumnProps {
   criptoFrom: string;
   criptoTo: string;
   available: string;
   deal: 'sell' | 'buy';
 }
 
-export function MarketFormCollumn({
+export function StopLimitFormCollumn({
   criptoFrom,
   criptoTo,
   available,
   deal,
-}: MarketFormCollumnProps) {
+}: StopLimitFormCollumnProps) {
   return (
     <Flex direction="column" flex="1 1 0%">
       <Flex justifyContent="space-between" fontSize="small" color="gray.300">
@@ -25,25 +27,19 @@ export function MarketFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputWallet
-            textLeft="Price"
-            value="Mercado"
-            disabled
-            textRight={criptoFrom}
-          />
+          <InputWallet textLeft="Stop" textRight={criptoFrom} />
+          <InputWallet textLeft="Limit" textRight={criptoFrom} />
           <InputWallet textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />
+          <InputWallet textLeft="Total" textRight={criptoFrom} />
         </Stack>
         <Flex direction="column" marginTop="6">
-          {deal == 'buy' ? (
-            <Button type="submit" colorScheme="green">
-              Comprar {criptoTo}
-            </Button>
-          ) : (
-            <Button type="submit" colorScheme="red">
-              Vender {criptoTo}
-            </Button>
-          )}
+          <ButtonWalletSpot
+            type="submit"
+            colorScheme={deal == 'buy' ? 'green' : 'red'}
+            currency={criptoTo}
+            deal={deal}
+          />
         </Flex>
       </Flex>
     </Flex>

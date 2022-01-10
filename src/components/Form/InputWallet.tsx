@@ -34,6 +34,7 @@ export function InputWallet({
         width="4.5rem"
         pointerEvents="none"
         color="gray.300"
+        fontSize="small"
         justifyContent="left"
         paddingLeft="1rem"
       >
@@ -51,7 +52,7 @@ export function InputWallet({
         value={valueInput}
         disabled={disabled}
       />
-      <InputRightElement width="4.5rem" pointerEvents="none">
+      <InputRightElement width="4.5rem" pointerEvents="none" fontSize="small">
         {textRight}
       </InputRightElement>
     </InputGroup>

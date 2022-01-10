@@ -19,7 +19,7 @@ export function SliderWallet() {
         defaultValue={5}
         min={0}
         max={100}
-        marginY="2"
+        marginY="3"
         colorScheme="teal"
         onChange={(v) => setSliderValue(v)}
         onMouseEnter={() => setShowTooltip(true)}
