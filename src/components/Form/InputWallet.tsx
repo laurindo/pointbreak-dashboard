@@ -3,7 +3,6 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
-  Text,
 } from '@chakra-ui/react';
 
 interface InputWalletProps {
@@ -28,6 +27,8 @@ export function InputWallet({ textRight, textLeft }: InputWalletProps) {
         paddingRight="4rem"
         textAlign="right"
         fontSize="small"
+        bgColor="gray.800"
+        borderWidth={0}
       />
       <InputRightElement width="4.5rem" pointerEvents="none">
         {textRight}

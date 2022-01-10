@@ -46,13 +46,13 @@ export function WalletSpot() {
                 criptoFrom="ETH"
                 criptoTo="EOS"
                 available="0.00000000"
-                sell
+                deal="buy"
               />
               <LimitFormCollumn
                 criptoFrom="ETH"
                 criptoTo="EOS"
                 available="0.00000000"
-                buy
+                deal="sell"
               />
             </HStack>
           </TabPanel>
