@@ -5,10 +5,26 @@ import {
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
+import { useStore, useStoreActions } from 'easy-peasy';
+import { useEffect, useState } from 'react';
 
 import { RiSearchLine } from 'react-icons/ri';
 
 export function SearchInMarkerPairs() {
+  const setQuery = useStoreActions((action) => action.setQuery);
+  const [querySearch, setQuerySearch] = useState('');
+
+  const handleQuery = (e) => {
+    setQuerySearch(e.target.value);
+  };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setQuery(querySearch), 500);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [querySearch, setQuery]);
+
   return (
     <Flex height="10" marginY={3}>
       <InputGroup>
@@ -18,7 +34,13 @@ export function SearchInMarkerPairs() {
           fontSize="1.2em"
           children={<Icon as={RiSearchLine} fontSize="20" />}
         />
-        <Input placeholder="Pesquisar" borderWidth={0} bgColor="gray.800" />
+        <Input
+          placeholder="Pesquisar"
+          borderWidth={0}
+          bgColor="gray.800"
+          onChange={handleQuery}
+          _focus={{ outline: 'none' }}
+        />
       </InputGroup>
     </Flex>
   );

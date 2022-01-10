@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import { GraficTrade } from '../components/GraficTrade';
+import { TradingViewChart } from '../components/TradingViewChart';
 
 import { Header } from '../components/Header';
 import { HeaderPairs } from '../components/HeaderPairs';
@@ -29,7 +29,7 @@ export default function Dashboard() {
           <Flex width="100%">
             <OrderBook />
             <Flex width="100%" direction="column">
-              <GraficTrade />
+              <TradingViewChart />
               <WalletSpot />
             </Flex>
           </Flex>
