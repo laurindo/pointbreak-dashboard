@@ -29,7 +29,11 @@ export function OCOFormCollumn({
         <Stack spacing={3}>
           <InputWallet textLeft="Price" textRight={criptoFrom} />
           <InputWallet textLeft="Stop" textRight={criptoFrom} />
-          <InputWallet textLeft="Limit" textRight={criptoFrom} />
+          <InputWallet
+            textLeft="Limit"
+            textRight={criptoFrom}
+            value="0.000123"
+          />
           <InputWallet textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />
           <InputWallet textLeft="Total" textRight={criptoFrom} />
