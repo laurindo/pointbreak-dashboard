@@ -25,7 +25,7 @@ const useTickerPrice = (pair: string) => {
     ws.current.onmessage = (e) => {
       if (isPaused) return;
       const message = JSON.parse(e.data);
-      // console.log(message);
+      console.log(message);
       setPrice(message);
     };
   }, [isPaused]);

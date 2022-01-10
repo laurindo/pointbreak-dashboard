@@ -24,8 +24,6 @@ export function InputWallet({
   const [valueInput, setValueInput] = React.useState(value);
   const handleChange = (event) => setValueInput(event.target.value);
 
-  console.log(valueInput);
-
   return (
     <InputGroup size="md">
       <InputLeftElement

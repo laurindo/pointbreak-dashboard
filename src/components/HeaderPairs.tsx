@@ -2,9 +2,12 @@ import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
 import useTickerPrice from '@/hooks/useTickerPrice';
 
+interface HeaderPairsProps {
+  pair: string;
+}
 // Todo: Renomear o nome deste componente
-export function HeaderPairs() {
-  const tickerPrice = useTickerPrice('btcusdt');
+export function HeaderPairs({ pair }: HeaderPairsProps) {
+  const tickerPrice = useTickerPrice(pair.toLowerCase().replace('_', ''));
 
   return (
     <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">
@@ -20,7 +23,7 @@ export function HeaderPairs() {
         >
           <Box textAlign="center">
             <Text fontSize="large" fontWeight="bold">
-              BTC/USDT
+              {pair.toUpperCase().replace('_', '/')}
             </Text>
             <Link display="flex" color="gray.300">
               <Icon as={RiCoinsLine} fontSize="14" mt="0.5" />
@@ -32,8 +35,12 @@ export function HeaderPairs() {
         <HStack spacing="8">
           <Flex align="center">
             <Box textAlign="center">
-              <Text fontSize="medium">{tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}</Text>
-              <Text fontSize="small">$ {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}</Text>
+              <Text fontSize="medium">
+                {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}
+              </Text>
+              <Text fontSize="small">
+                $ {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}
+              </Text>
             </Box>
           </Flex>
 
@@ -53,7 +60,9 @@ export function HeaderPairs() {
               <Text color="gray.300" fontSize="small">
                 Máximo em 24h
               </Text>
-              <Text fontSize="small">{tickerPrice?.h ? Number(tickerPrice.h).toFixed(2) : 0}</Text>
+              <Text fontSize="small">
+                {tickerPrice?.h ? Number(tickerPrice.h).toFixed(2) : 0}
+              </Text>
             </Box>
           </Flex>
 
@@ -62,7 +71,9 @@ export function HeaderPairs() {
               <Text color="gray.300" fontSize="small">
                 Mínimo em 24h
               </Text>
-              <Text fontSize="small">{tickerPrice?.l ? Number(tickerPrice.l).toFixed(2) : 0}</Text>
+              <Text fontSize="small">
+                {tickerPrice?.l ? Number(tickerPrice.l).toFixed(2) : 0}
+              </Text>
             </Box>
           </Flex>
 
