@@ -1,6 +1,8 @@
-import { Button, Flex, Stack, Text } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
+
 import { InputWallet } from '../Form/InputWallet';
 import { SliderWallet } from './SliderWallet';
+import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
 
 interface MarketFormCollumnProps {
   criptoFrom: string;
@@ -27,6 +29,7 @@ export function MarketFormCollumn({
         <Stack spacing={3}>
           <InputWallet
             textLeft="Price"
+            type="text"
             value="Mercado"
             disabled
             textRight={criptoFrom}
@@ -35,15 +38,12 @@ export function MarketFormCollumn({
           <SliderWallet />
         </Stack>
         <Flex direction="column" marginTop="6">
-          {deal == 'buy' ? (
-            <Button type="submit" colorScheme="green">
-              Comprar {criptoTo}
-            </Button>
-          ) : (
-            <Button type="submit" colorScheme="red">
-              Vender {criptoTo}
-            </Button>
-          )}
+          <ButtonWalletSpot
+            type="submit"
+            colorScheme={deal == 'buy' ? 'green' : 'red'}
+            currency={criptoTo}
+            deal={deal}
+          />
         </Flex>
       </Flex>
     </Flex>

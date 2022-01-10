@@ -11,6 +11,7 @@ interface InputWalletProps {
   textLeft: string;
   value?: string;
   disabled?: boolean;
+  type?: string;
 }
 
 export function InputWallet({
@@ -18,15 +19,12 @@ export function InputWallet({
   textLeft,
   value,
   disabled,
+  type = 'number',
 }: InputWalletProps) {
-  const [valueInput, setValueInput] = React.useState('');
+  const [valueInput, setValueInput] = React.useState(value);
   const handleChange = (event) => setValueInput(event.target.value);
 
-  React.useEffect(() => {
-    if (value) {
-      setValueInput(value);
-    }
-  }, [value]);
+  console.log(valueInput);
 
   return (
     <InputGroup size="md">
@@ -41,7 +39,7 @@ export function InputWallet({
         {textLeft}
       </InputLeftElement>
       <Input
-        type="number"
+        type={type}
         paddingLeft="4.5rem"
         paddingRight="4rem"
         textAlign="right"

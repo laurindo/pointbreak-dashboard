@@ -8,9 +8,11 @@ import {
   TabPanel,
   HStack,
 } from '@chakra-ui/react';
+
 import { LimitFormCollumn } from './LimitFormCollumn';
 import { MarketFormCollumn } from './MarketFormCollumn';
 import { StopLimitFormCollumn } from './StopLimitFormCollumn';
+import { OCOFormCollumn } from './OCOFormCollumn';
 
 export function WalletSpot() {
   return (
@@ -90,7 +92,22 @@ export function WalletSpot() {
               />
             </HStack>
           </TabPanel>
-          <TabPanel>OCO</TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <OCOFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <OCOFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </Flex>
