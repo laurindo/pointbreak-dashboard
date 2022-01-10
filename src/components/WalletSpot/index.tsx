@@ -8,7 +8,11 @@ import {
   TabPanel,
   HStack,
 } from '@chakra-ui/react';
+
 import { LimitFormCollumn } from './LimitFormCollumn';
+import { MarketFormCollumn } from './MarketFormCollumn';
+import { StopLimitFormCollumn } from './StopLimitFormCollumn';
+import { OCOFormCollumn } from './OCOFormCollumn';
 
 export function WalletSpot() {
   return (
@@ -46,19 +50,64 @@ export function WalletSpot() {
                 criptoFrom="ETH"
                 criptoTo="EOS"
                 available="0.00000000"
-                sell
+                deal="buy"
               />
               <LimitFormCollumn
                 criptoFrom="ETH"
                 criptoTo="EOS"
                 available="0.00000000"
-                buy
+                deal="sell"
               />
             </HStack>
           </TabPanel>
-          <TabPanel>Market Order</TabPanel>
-          <TabPanel>Stop-Limit</TabPanel>
-          <TabPanel>OCO</TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <MarketFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <MarketFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <StopLimitFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <StopLimitFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
+          <TabPanel>
+            <HStack spacing={6}>
+              <OCOFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="buy"
+              />
+              <OCOFormCollumn
+                criptoFrom="ETH"
+                criptoTo="EOS"
+                available="0.00000000"
+                deal="sell"
+              />
+            </HStack>
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </Flex>

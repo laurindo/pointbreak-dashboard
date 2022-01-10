@@ -149,7 +149,7 @@ export function MarketPairs() {
       <Tabs w="100%" size="sm">
         <TabList>
           {tabs.map((tab, index) => (
-            <Tab key={index} fontSize="small">
+            <Tab key={index} fontSize="small" _focus={{ outline: '0' }}>
               {tab}
             </Tab>
           ))}

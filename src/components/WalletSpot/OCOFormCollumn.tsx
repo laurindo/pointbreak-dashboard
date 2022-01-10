@@ -1,22 +1,22 @@
-import { Button, Flex, Stack, Text } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { InputWallet } from '../Form/InputWallet';
 import { SliderWallet } from './SliderWallet';
 import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
 
-interface LimitFormCollumnProps {
+interface OCOFormCollumnProps {
   criptoFrom: string;
   criptoTo: string;
   available: string;
   deal: 'sell' | 'buy';
 }
 
-export function LimitFormCollumn({
+export function OCOFormCollumn({
   criptoFrom,
   criptoTo,
   available,
   deal,
-}: LimitFormCollumnProps) {
+}: OCOFormCollumnProps) {
   return (
     <Flex direction="column" flex="1 1 0%">
       <Flex justifyContent="space-between" fontSize="small" color="gray.300">
@@ -27,11 +27,9 @@ export function LimitFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputWallet
-            textLeft="Price"
-            textRight={criptoFrom}
-            // value="0,000123"
-          />
+          <InputWallet textLeft="Price" textRight={criptoFrom} />
+          <InputWallet textLeft="Stop" textRight={criptoFrom} />
+          <InputWallet textLeft="Limit" textRight={criptoFrom} />
           <InputWallet textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />
           <InputWallet textLeft="Total" textRight={criptoFrom} />
