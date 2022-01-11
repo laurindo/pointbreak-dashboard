@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useStoreState } from 'easy-peasy';
 import { useMemo } from 'react';
+import Link from 'next/link';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
 const scrollBarCss = {
@@ -68,17 +69,19 @@ export function TableToCript({ data, height = '450px' }) {
         </Thead>
         <Tbody>
           {filteredData.map((d) => (
-            <Tr key={d.key}>
-              <Td>
-                <Flex>
-                  <Icon as={FaStar} mr="5px" />
-                  <Text fontSize="xs">{d.pair}</Text>
-                </Flex>
-              </Td>
-              <Td isNumeric>
-                <Text fontSize="xs">{d.price}</Text>
-              </Td>
-            </Tr>
+            <Link href={`/trade/${d.pair.replace('/', '_')}`} key={d.key}>
+              <Tr>
+                <Td>
+                  <Flex>
+                    <Icon as={FaStar} mr="5px" />
+                    <Text fontSize="xs">{d.pair}</Text>
+                  </Flex>
+                </Td>
+                <Td isNumeric>
+                  <Text fontSize="xs">{d.price}</Text>
+                </Td>
+              </Tr>
+            </Link>
           ))}
         </Tbody>
       </Table>
