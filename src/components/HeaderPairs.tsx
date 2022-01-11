@@ -1,14 +1,25 @@
 import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
-import useTickerPrice from '@/hooks/useTickerPrice';
+
+interface TickerPrice {
+  c: string; // Last Price
+  o: string; // Open Price
+  h: string; // High price
+  l: string; // Low price
+  p: string; // Price change
+  P: string; // Price change percent
+  v: string; // Total traded base asset volume
+  q: string; // Total traded quote asset volume
+}
 
 interface HeaderPairsProps {
   pair: string;
+  tickerPrice: TickerPrice;
 }
 // Todo: Renomear o nome deste componente
-export function HeaderPairs({ pair }: HeaderPairsProps) {
-  const tickerPrice = useTickerPrice(pair.toLowerCase().replace('_', ''));
-
+export function HeaderPairs({ pair, tickerPrice }: HeaderPairsProps) {
+  // debugger;
+  const symbol = pair.toUpperCase().split('_');
   return (
     <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">
       <Flex h="20" align="center">
@@ -23,7 +34,7 @@ export function HeaderPairs({ pair }: HeaderPairsProps) {
         >
           <Box textAlign="center">
             <Text fontSize="large" fontWeight="bold">
-              {pair.toUpperCase().replace('_', '/')}
+              {symbol[0]}/{symbol[1]}
             </Text>
             <Link display="flex" color="gray.300">
               <Icon as={RiCoinsLine} fontSize="14" mt="0.5" />
@@ -36,11 +47,9 @@ export function HeaderPairs({ pair }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text fontSize="medium">
-                {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}
+                {tickerPrice?.c ? Number(tickerPrice.c) : 0}
               </Text>
-              <Text fontSize="small">
-                $ {tickerPrice?.o ? Number(tickerPrice.o).toFixed(2) : 0}
-              </Text>
+              <Text fontSize="small">$ pending</Text>
             </Box>
           </Flex>
 
@@ -50,7 +59,7 @@ export function HeaderPairs({ pair }: HeaderPairsProps) {
                 Variação em 24h
               </Text>
               <Text color="red.500" fontSize="small">
-                -0.0207 -3.98%
+                {tickerPrice?.p} {tickerPrice?.P}
               </Text>
             </Box>
           </Flex>
@@ -80,18 +89,18 @@ export function HeaderPairs({ pair }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Volume em 24h(ADX)
+                Volume em 24h({symbol[0]})
               </Text>
-              <Text fontSize="small">6,029,941.00</Text>
+              <Text fontSize="small">{tickerPrice?.v}</Text>
             </Box>
           </Flex>
 
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Volume 24h(USDT)
+                Volume 24h({symbol[1]})
               </Text>
-              <Text fontSize="small">3,047,896.39</Text>
+              <Text fontSize="small">{tickerPrice?.q}</Text>
             </Box>
           </Flex>
         </HStack>

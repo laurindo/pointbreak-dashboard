@@ -8,6 +8,7 @@ interface LimitFormCollumnProps {
   criptoFrom: string;
   criptoTo: string;
   available: string;
+  availableAssetName: string;
   deal: 'sell' | 'buy';
 }
 
@@ -15,6 +16,7 @@ export function LimitFormCollumn({
   criptoFrom,
   criptoTo,
   available,
+  availableAssetName,
   deal,
 }: LimitFormCollumnProps) {
   return (
@@ -22,7 +24,7 @@ export function LimitFormCollumn({
       <Flex justifyContent="space-between" fontSize="small" color="gray.300">
         <Text>Disponível</Text>
         <Text>
-          {available} {criptoFrom}
+          {available} {availableAssetName}
         </Text>
       </Flex>
       <Flex as="form" direction="column" marginTop="1">

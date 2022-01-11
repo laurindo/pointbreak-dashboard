@@ -17,6 +17,7 @@ type ResponseJoinSymbols = {
   id: String;
   name: String;
   quoteAsset: String;
+  pair: String;
   price: String;
   symbol: String;
 };
@@ -30,9 +31,12 @@ export function joinSymbols(tokens = [], symbols: []): ResponseJoinSymbols[] {
       return [];
     }
     return symbols.map((symbol: Symbol) => {
+      const res = tokens.find((token: Token) => token.symbol === symbol.name);
+      // debugger;
       return {
         ...symbol,
-        ...tokens.find((token: Token) => token.symbol === symbol.name),
+        ...res,
+        pair: `${symbol.baseAsset}/${symbol.quoteAsset}`,
       };
     });
   }, [tokens, symbols]);

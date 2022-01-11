@@ -6,10 +6,20 @@ import { OrderBook } from '@/components/OrderBook';
 import { TradingViewChart } from '@/components/TradingViewChart';
 import { WalletSpot } from '@/components/WalletSpot';
 import { MarketPairs } from '@/components/MarketPairs';
+import useTickerPrice from '@/hooks/useTickerPrice';
 
-export default function Pair() {
+export default function Pair({ pair }: { pair: string }) {
   const router = useRouter();
-  console.log(`PAIR: ${router.query.pair}`);
+  let pairName = '';
+
+  if (router?.query?.pair) {
+    pairName = String(router.query.pair).toLowerCase().replace('_', '');
+  } else {
+    pairName = pair.toLowerCase().replace('_', '');
+  }
+
+  const tickerPrice = useTickerPrice(pairName);
+
   return (
     <Flex direction="column" height="100vh">
       <Header />
@@ -27,7 +37,7 @@ export default function Pair() {
           borderWidth={1}
           borderColor="gray.700"
         >
-          <HeaderPairs pair={String(router.query.pair)} />
+          <HeaderPairs pair={pair} tickerPrice={tickerPrice} />
           <Flex width="100%">
             <OrderBook />
             <Flex width="100%" direction="column">
@@ -41,3 +51,7 @@ export default function Pair() {
     </Flex>
   );
 }
+
+Pair.getInitialProps = async (ctx) => {
+  return { pair: ctx.query.pair };
+};
