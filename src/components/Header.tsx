@@ -10,8 +10,14 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
+import { useActiveWeb3React } from '@/services/web3';
+import Web3Network from '@/components/Web3Network';
+import Web3Status from '@/components/Web3Status';
 
 export function Header() {
+  const { account, chainId, library } = useActiveWeb3React();
+  // debugger;
+
   return (
     <Flex
       width="100%"
@@ -36,6 +42,16 @@ export function Header() {
           </Link>
         </NextLink>
       </Text>
+
+      <div>
+        {library && library.provider.isMetaMask && (
+          <div className="hidden sm:inline-block">
+            aqui
+            <Web3Network />
+          </div>
+        )}
+        <Web3Status />
+      </div>
 
       <Flex align="center" ml="auto">
         <HStack
