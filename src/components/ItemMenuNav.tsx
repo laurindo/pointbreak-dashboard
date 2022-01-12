@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 interface ItemMenuNavProps {
@@ -12,6 +12,7 @@ export function ItemMenuNav({ children, path }: ItemMenuNavProps) {
       <Text
         display="inline-block"
         position="relative"
+        marginX="4"
         paddingX="0.5"
         lineHeight="5"
         color="gray.300"

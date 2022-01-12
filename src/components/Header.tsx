@@ -28,6 +28,7 @@ export function Header() {
 
       <Box as="nav" height="5" marginLeft="5">
         <ItemMenuNav path="/">Home</ItemMenuNav>
+        <ItemMenuNav path="/">Chave</ItemMenuNav>
       </Box>
 
       <Flex align="center" ml="auto">
