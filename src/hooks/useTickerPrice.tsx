@@ -6,7 +6,7 @@ const useTickerPrice = (pair: string) => {
   const ws = useRef(null);
 
   useEffect(() => {
-    ws.current = new WebSocket(`wss://stream.binance.com:9443/stream`);
+    ws.current = new WebSocket(`wss://stream.binance.com:9443/stream1`);
     ws.current.onopen = () => {
       console.log('ws opened');
 
