@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
+import { ItemMenuNav } from './ItemMenuNav';
 
 export function Header() {
   return (
@@ -21,21 +22,13 @@ export function Header() {
       paddingX="6"
       as="header"
       align="center"
-      maxWidth={1520}
+      maxWidth="100vw"
     >
-      <Text
-        fontSize="3xl"
-        fontWeight="bold"
-        letterSpacing="tight"
-        width="64"
-        color="yellow.500"
-      >
-        <NextLink href="/dashboard" passHref>
-          <Link>
-            <Image src="/images/logo-horizontal.png" alt="Logo" height={50} />
-          </Link>
-        </NextLink>
-      </Text>
+      <Image src="/images/logo-horizontal.png" alt="Logo" height={50} />
+
+      <Box as="nav" height="5" marginLeft="5">
+        <ItemMenuNav path="/">Home</ItemMenuNav>
+      </Box>
 
       <Flex align="center" ml="auto">
         <HStack
