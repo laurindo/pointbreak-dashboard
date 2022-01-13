@@ -57,7 +57,7 @@ export function Header() {
 
         <Flex align="center">
           <Box mr="4" textAlign="right">
-            <Text>{shortenAddress(account)}</Text>
+            <Text>{account && shortenAddress(account)}</Text>
             <Text color="gray.300" fontSize="small">
               Balance: {balance}
             </Text>
