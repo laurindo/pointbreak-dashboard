@@ -31,18 +31,8 @@ export function Header() {
         <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
       </Box>
 
-      <div>
-        {library && library.provider.isMetaMask && (
-          <div className="hidden sm:inline-block">
-            aqui
-            <Web3Network />
-          </div>
-        )}
-        <Web3Status />
-      </div>
-
       <Flex align="center" ml="auto">
-        {/*<HStack
+        <HStack
           spacing="8"
           mx="8"
           pr="8"
@@ -53,15 +43,27 @@ export function Header() {
         >
           <Icon as={RiNotificationLine} fontSize="20" />
           <Icon as={RiUserAddLine} fontSize="20" />
-        </HStack>*/}
+        </HStack>
 
         <Flex align="center">
-          <Box mr="4" textAlign="right">
-            <Text>{account && shortenAddress(account)}</Text>
-            <Text color="gray.300" fontSize="small">
-              Balance: {balance}
-            </Text>
-          </Box>
+          {account ? (
+            <Box mr="4" textAlign="right">
+              <Text>{account && shortenAddress(account)}</Text>
+              <Text color="gray.300" fontSize="small">
+                Balance: {balance}
+              </Text>
+            </Box>
+          ) : (
+            <Box>
+              {library && library.provider.isMetaMask && (
+                <div className="hidden sm:inline-block">
+                  aqui
+                  <Web3Network />
+                </div>
+              )}
+              <Web3Status />
+            </Box>
+          )}
         </Flex>
       </Flex>
     </Flex>
