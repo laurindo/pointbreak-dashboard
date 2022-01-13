@@ -4,9 +4,12 @@ import { ItemMenuNav } from './ItemMenuNav';
 import { useActiveWeb3React } from '@/services/web3';
 import Web3Network from '@/components/Web3Network';
 import Web3Status from '@/components/Web3Status';
+import useBalance from '@/hooks/useBalance';
 
 export function Header() {
   const { account, chainId, library } = useActiveWeb3React();
+  const balance = useBalance(account);
+  console.log('Balance: ', balance);
   // debugger;
 
   return (

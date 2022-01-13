@@ -63,7 +63,7 @@ const useTickerPrice = (pair: string) => {
     ws.current.onmessage = (e) => {
       if (isPaused) return;
       const message = JSON.parse(e.data);
-      console.log(message.data);
+      // console.log(message.data);
 
       switch (message.stream) {
         case '!miniTicker@arr@3000ms':
