@@ -4,9 +4,13 @@ import { ItemMenuNav } from './ItemMenuNav';
 import { useActiveWeb3React } from '@/services/web3';
 import Web3Network from '@/components/Web3Network';
 import Web3Status from '@/components/Web3Status';
+import useBalance from '@/hooks/useBalance';
+import { shortenAddress } from '@/utils/format';
 
 export function Header() {
   const { account, chainId, library } = useActiveWeb3React();
+
+  const balance = useBalance(account);
   // debugger;
 
   return (
@@ -38,7 +42,7 @@ export function Header() {
       </div>
 
       <Flex align="center" ml="auto">
-        <HStack
+        {/*<HStack
           spacing="8"
           mx="8"
           pr="8"
@@ -49,21 +53,15 @@ export function Header() {
         >
           <Icon as={RiNotificationLine} fontSize="20" />
           <Icon as={RiUserAddLine} fontSize="20" />
-        </HStack>
+        </HStack>*/}
 
         <Flex align="center">
           <Box mr="4" textAlign="right">
-            <Text>Diego Masin</Text>
+            <Text>{shortenAddress(account)}</Text>
             <Text color="gray.300" fontSize="small">
-              diegoifce@gmail.com
+              Balance: {balance}
             </Text>
           </Box>
-
-          <Avatar
-            size="md"
-            name="Diego Masin"
-            src="https://avatars.githubusercontent.com/u/5197300?v=4"
-          />
         </Flex>
       </Flex>
     </Flex>

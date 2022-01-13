@@ -18,7 +18,8 @@ export default function Pair({ pair }: { pair: string }) {
     pairName = pair.toLowerCase().replace('_', '');
   }
 
-  const tickerPrice = useTickerPrice(pairName);
+  // ISSO TA DEIXANDO A PERFORMANCE DO APP HORRIVEL, VER DEPOIS
+  const tickerPrice = {}; //useTickerPrice(pairName);
 
   return (
     <Flex direction="column" height="100vh">

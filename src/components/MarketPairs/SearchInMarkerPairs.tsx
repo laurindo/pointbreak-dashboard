@@ -6,7 +6,7 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { useStore, useStoreActions } from 'easy-peasy';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { RiSearchLine } from 'react-icons/ri';
 
@@ -14,9 +14,12 @@ export function SearchInMarkerPairs() {
   const setQuery = useStoreActions((action) => action.setQuery);
   const [querySearch, setQuerySearch] = useState('');
 
-  const handleQuery = (e) => {
-    setQuerySearch(e.target.value);
-  };
+  const handleQuery = useCallback(
+    (e) => {
+      setQuerySearch(e.target.value);
+    },
+    [querySearch],
+  );
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setQuery(querySearch), 500);
