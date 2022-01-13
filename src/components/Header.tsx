@@ -1,14 +1,4 @@
-import {
-  Flex,
-  Text,
-  Icon,
-  HStack,
-  Box,
-  Avatar,
-  Image,
-  Link,
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Flex, Text, Icon, HStack, Box, Avatar, Image } from '@chakra-ui/react';
 import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
 import { ItemMenuNav } from './ItemMenuNav';
 
@@ -28,7 +18,7 @@ export function Header() {
 
       <Box as="nav" height="5" marginLeft="5">
         <ItemMenuNav path="/">Home</ItemMenuNav>
-        <ItemMenuNav path="/">Chave</ItemMenuNav>
+        <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
       </Box>
 
       <Flex align="center" ml="auto">
