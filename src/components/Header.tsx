@@ -1,8 +1,14 @@
 import { Flex, Text, Icon, HStack, Box, Avatar, Image } from '@chakra-ui/react';
 import { RiNotificationLine, RiUserAddLine } from 'react-icons/ri';
 import { ItemMenuNav } from './ItemMenuNav';
+import { useActiveWeb3React } from '@/services/web3';
+import Web3Network from '@/components/Web3Network';
+import Web3Status from '@/components/Web3Status';
 
 export function Header() {
+  const { account, chainId, library } = useActiveWeb3React();
+  // debugger;
+
   return (
     <Flex
       width="100%"
@@ -20,6 +26,16 @@ export function Header() {
         <ItemMenuNav path="/">Home</ItemMenuNav>
         <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
       </Box>
+
+      <div>
+        {library && library.provider.isMetaMask && (
+          <div className="hidden sm:inline-block">
+            aqui
+            <Web3Network />
+          </div>
+        )}
+        <Web3Status />
+      </div>
 
       <Flex align="center" ml="auto">
         <HStack
