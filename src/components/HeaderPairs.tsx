@@ -1,3 +1,4 @@
+import useTickerPrice from '@/hooks/useTickerPrice';
 import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
 
@@ -14,12 +15,13 @@ interface TickerPrice {
 
 interface HeaderPairsProps {
   pair: string;
-  tickerPrice: TickerPrice;
+  pairName: string;
 }
 // Todo: Renomear o nome deste componente
-export function HeaderPairs({ pair, tickerPrice }: HeaderPairsProps) {
-  // debugger;
+export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
   const symbol = pair.toUpperCase().split('_');
+  const tickerPrice = useTickerPrice(pairName);
+
   return (
     <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">
       <Flex h="20" align="center">

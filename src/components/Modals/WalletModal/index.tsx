@@ -251,28 +251,16 @@ export default function WalletModal({
     }
     return (
       <Flex>
-        <div className="flex flex-col space-y-6">
-          {walletView === WALLET_VIEWS.PENDING ? (
-            <PendingView
-              connector={pendingWallet}
-              error={pendingError}
-              setPendingError={setPendingError}
-              tryActivation={tryActivation}
-            />
-          ) : (
-            <div className="flex flex-col space-y-5 overflow-y-auto">
-              {getOptions()}
-            </div>
-          )}
-          {walletView !== WALLET_VIEWS.PENDING && (
-            <div className="flex flex-col text-center">
-              <div className="text-secondary">New to Ethereum?</div>
-              <a href="https://ethereum.org/wallets/" color="blue">
-                Learn more about wallets
-              </a>
-            </div>
-          )}
-        </div>
+        {walletView === WALLET_VIEWS.PENDING ? (
+          <PendingView
+            connector={pendingWallet}
+            error={pendingError}
+            setPendingError={setPendingError}
+            tryActivation={tryActivation}
+          />
+        ) : (
+          <div>{getOptions()}</div>
+        )}
       </Flex>
     );
   }

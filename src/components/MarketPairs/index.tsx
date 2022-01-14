@@ -146,7 +146,7 @@ export function MarketPairs() {
     >
       <SearchInMarkerPairs />
 
-      <Tabs w="100%" size="sm">
+      <Tabs w="100%" size="sm" defaultIndex={1}>
         <TabList>
           {tabs.map((tab, index) => (
             <Tab key={index} fontSize="small" _focus={{ outline: '0' }}>
