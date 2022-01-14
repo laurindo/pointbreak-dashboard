@@ -34,14 +34,14 @@ export default function Pair({ pair }: { pair: string }) {
         <Flex
           direction="column"
           width="100%"
-          maxWidth={1110}
+          maxWidth={1200}
           borderWidth={1}
           borderColor="gray.700"
         >
           <HeaderPairs pair={pair} tickerPrice={tickerPrice} />
           <Flex width="100%">
             <OrderBook />
-            <Flex width="100%" direction="column">
+            <Flex width="100%" maxWidth={880} direction="column">
               <TradingViewChart />
               <WalletSpot />
             </Flex>

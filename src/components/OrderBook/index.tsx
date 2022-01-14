@@ -15,7 +15,7 @@ export function OrderBook() {
       <Box
         width="100%"
         bgColor="gray.800"
-        color="blue.500"
+        color="blue.600"
         fontSize="medium"
         fontWeight="bold"
         padding="2"
