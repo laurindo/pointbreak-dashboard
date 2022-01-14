@@ -7,7 +7,7 @@ const store = createStore(
     ...StatePairs,
     ...StateModals,
     query: '',
-    setQuery: action((state, payload) => {
+    setQuery: action((state: any, payload) => {
       state.query = payload;
     }),
   }),
