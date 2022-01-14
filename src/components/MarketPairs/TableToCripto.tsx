@@ -32,7 +32,7 @@ const scrollBarCss = {
 };
 
 export function TableToCript({ data, height = '450px' }) {
-  const query = useStoreState((state) => state.query);
+  const query = useStoreState((state: any) => state.query);
 
   const filteredData = useMemo(
     () =>

@@ -46,14 +46,16 @@ export function MarketPairs() {
   const [filterText, setFilterText] = useState('');
 
   // usa a action pra guardar no Store do redux o par selecionado
-  const setSelectedPair = useStoreActions((actions) => actions.setSelectedPair);
+  const setSelectedPair = useStoreActions(
+    (actions: any) => actions.setSelectedPair,
+  );
   const setFavoritePairs = useStoreActions(
-    (actions) => actions.setFavoritePairs,
+    (actions: any) => actions.setFavoritePairs,
   );
   const removeFavoritePairs = useStoreActions(
-    (actions) => actions.removeFavoritePairs,
+    (actions: any) => actions.removeFavoritePairs,
   );
-  const favoritePairs = useStoreState((state) => state.favoritesPairs);
+  const favoritePairs = useStoreState((state: any) => state.favoritesPairs);
 
   // ==========================================================================
   // FIX - DEPOIS REFATORAR ESSA PARTE de BAIXO
