@@ -4,6 +4,8 @@ import { AbstractConnector } from '@web3-react/abstract-connector';
 import Option from './Option';
 import React from 'react';
 
+declare var window: any;
+
 export default function PendingView({
   connector,
   error = false,

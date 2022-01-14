@@ -29,6 +29,9 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 // import { useLingui } from '@lingui/react'
 // import usePrevious from '../../hooks/usePrevious';
 
+declare var window: any;
+declare var web3: any;
+
 const WALLET_VIEWS = {
   OPTIONS: 'options',
   OPTIONS_SECONDARY: 'options_secondary',
