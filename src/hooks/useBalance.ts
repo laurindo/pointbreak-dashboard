@@ -14,8 +14,9 @@ const useBalance = (account) => {
         process.env.NODE_ENV === 'development'
           ? process.env.NEXT_PUBLIC_BSC_TEST_URL
           : process.env.NEXT_PUBLIC_BSC_MAIN_URL;
+      console.log('URL BSC: ', URL);
       const web3 = new Web3(URL);
-      const tokenAddresses = ['0x8b624301F512E46B666A825FBd4336A273fd0FF9'];
+      const tokenAddresses = [process.env.NEXT_PUBLIC_CONTRACT_ADDRESS];
       for (let tokenAddress of tokenAddresses) {
         const contract = new web3.eth.Contract(
           [

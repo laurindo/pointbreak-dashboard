@@ -6,7 +6,6 @@ import { OrderBook } from '@/components/OrderBook';
 import { TradingViewChart } from '@/components/TradingViewChart';
 import { WalletSpot } from '@/components/WalletSpot';
 import { MarketPairs } from '@/components/MarketPairs';
-import useTickerPrice from '@/hooks/useTickerPrice';
 
 export default function Pair({ pair }: { pair: string }) {
   const router = useRouter();
@@ -17,9 +16,6 @@ export default function Pair({ pair }: { pair: string }) {
   } else {
     pairName = pair.toLowerCase().replace('_', '');
   }
-
-  // ISSO TA DEIXANDO A PERFORMANCE DO APP HORRIVEL, VER DEPOIS
-  const tickerPrice = {}; //useTickerPrice(pairName);
 
   return (
     <Flex direction="column" height="100vh">
@@ -38,7 +34,7 @@ export default function Pair({ pair }: { pair: string }) {
           borderWidth={1}
           borderColor="gray.700"
         >
-          <HeaderPairs pair={pair} tickerPrice={tickerPrice} />
+          <HeaderPairs pair={pair} pairName={pairName} />
           <Flex width="100%">
             <OrderBook />
             <Flex width="100%" maxWidth={880} direction="column">
