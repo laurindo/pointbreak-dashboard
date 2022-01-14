@@ -197,12 +197,12 @@ export const SUPPORTED_NETWORKS: {
 export default function NetworkModal(): JSX.Element | null {
   const { chainId, library, account } = useActiveWeb3React();
   // const networkModalOpen = useModalOpen(ApplicationModal.NETWORK);
-  const isOpenModal = useStoreState((state) => state.isOpenModal);
+  const isOpenModal = useStoreState((state: any) => state.isOpenModal);
   const setOpenWalletModal = useStoreActions(
-    (action) => action.setOpenWalletModal,
+    (action: any) => action.setOpenWalletModal,
   );
   const setCloseWalletModal = useStoreActions(
-    (action) => action.setCloseWalletModal,
+    (action: any) => action.setCloseWalletModal,
   );
 
   if (!chainId) return null;

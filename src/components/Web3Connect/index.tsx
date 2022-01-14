@@ -14,7 +14,7 @@ export default function Web3Connect({
 }) {
   // const { i18n } = useLingui()
   const toggleWalletModal = useStoreActions(
-    (action) => action.toggleWalletModal,
+    (action: any) => action.toggleWalletModal,
   );
 
   const { error } = useWeb3React();

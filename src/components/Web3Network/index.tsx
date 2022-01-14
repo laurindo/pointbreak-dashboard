@@ -11,7 +11,7 @@ function Web3Network(): JSX.Element | null {
   const { chainId } = useActiveWeb3React();
 
   const setOpenWalletModal = useStoreActions(
-    (action) => action.setOpenWalletModal,
+    (action: any) => action.setOpenWalletModal,
   );
 
   if (!chainId) return null;

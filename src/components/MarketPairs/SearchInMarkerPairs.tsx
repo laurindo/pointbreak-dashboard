@@ -11,7 +11,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
 
 export function SearchInMarkerPairs() {
-  const setQuery = useStoreActions((action) => action.setQuery);
+  const setQuery = useStoreActions((action: any) => action.setQuery);
   const [querySearch, setQuerySearch] = useState('');
 
   const handleQuery = useCallback(

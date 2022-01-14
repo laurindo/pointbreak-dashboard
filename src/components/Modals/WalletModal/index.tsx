@@ -45,13 +45,13 @@ export default function WalletModal({
   confirmedTransactions: string[]; // hashes of confirmed
   ENSName?: string;
 }) {
-  const isOpenModal = useStoreState((state) => state.isOpenModal);
+  const isOpenModal = useStoreState((state: any) => state.isOpenModal);
   const setOpenWalletModal = useStoreActions(
-    (action) => action.setOpenWalletModal,
+    (action: any) => action.setOpenWalletModal,
   );
 
   const setCloseWalletModal = useStoreActions(
-    (action) => action.setCloseWalletModal,
+    (action: any) => action.setCloseWalletModal,
   );
 
   const isMobile = false;
