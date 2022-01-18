@@ -228,7 +228,7 @@ export default function WalletModal({
 
   function getModalContent() {
     if (error) {
-      debugger;
+      // debugger;
       return (
         <div>
           <div>Wrong network or error network</div>

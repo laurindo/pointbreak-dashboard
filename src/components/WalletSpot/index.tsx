@@ -22,7 +22,7 @@ export function WalletSpot() {
 
   useEffect(() => {
     if (router?.query?.pair) {
-      debugger;
+      // debugger;
       setPair(String(router.query.pair));
     }
   }, [router]);
@@ -61,14 +61,14 @@ export function WalletSpot() {
               <LimitFormCollumn
                 criptoFrom={pair.split('_')[0]} // base asset
                 criptoTo={pair.split('_')[1]} // quote asset
-                available="0.00000000"
+                available="0.00000000" // actual amount criptoFrom
                 availableAssetName={pair.split('_')[0]}
                 deal="buy"
               />
               <LimitFormCollumn
                 criptoFrom={pair.split('_')[0]} // base asset
                 criptoTo={pair.split('_')[1]} // quote asset
-                available="0.00000000"
+                available="0.00000000" // actual amount criptoTo
                 availableAssetName={pair.split('_')[1]}
                 deal="sell"
               />

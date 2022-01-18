@@ -1,9 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 
-const useTickerPrice = (pair: string) => {
+const useTickerPrice = (pairName: string) => {
+  const [pair, setPair] = useState(pairName);
+  if (pairName != pair) {
+    setPair(pairName);
+  }
   const [price, setPrice] = useState(null);
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
+  debugger;
 
   useEffect(() => {
     ws.current = new WebSocket(process.env.NEXT_PUBLIC_STREAM_BINANCE_URL);
@@ -55,7 +60,7 @@ const useTickerPrice = (pair: string) => {
     return () => {
       wsCurrent.close();
     };
-  }, []);
+  }, [pair]);
 
   useEffect(() => {
     if (!ws.current) return;
@@ -84,7 +89,7 @@ const useTickerPrice = (pair: string) => {
           break;
       }
     };
-  }, [isPaused]);
+  }, [isPaused, pair]);
 
   return price;
 };
