@@ -274,9 +274,11 @@ export default function WalletModal({
       onClose={setCloseWalletModal}
       motionPreset="slideInBottom"
     >
-      <ModalOverlay bg="#666464cf" filter="blur(4px)" />
+      <ModalOverlay bg="gray.900" css={{ opacity: '0.9 !important' }} />
       <ModalContent
-        bg="#000"
+        bg="gray.800"
+        borderWidth={1}
+        borderColor="gray.700"
         minHeight="500px"
         alignItems="center"
         justifyContent="center"

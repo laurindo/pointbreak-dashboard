@@ -63,7 +63,7 @@ export function Header() {
                 color="whiteAlpha.800"
               >
                 <Text display="flex" justifyContent="center" align="center">
-                  <Icon as={RiBitCoinLine} fontSize="19" marginRight="1" />
+                  <Icon as={RiWallet3Line} fontSize="19" marginRight="1" />
                   {account && shortenAddress(account)}
                 </Text>
               </Box>
@@ -80,7 +80,7 @@ export function Header() {
               >
                 <Text display="flex" justifyContent="center" align="center">
                   Balance: {balance}
-                  <Icon as={RiWallet3Line} fontSize="19" marginLeft="1" />
+                  <Icon as={RiBitCoinLine} fontSize="19" marginLeft="1" />
                 </Text>
               </Box>
             </>
