@@ -17,11 +17,9 @@ interface HeaderPairsProps {
   pair: string;
   pairName: string;
 }
-// Todo: Renomear o nome deste componente
 export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
   const symbol = pair.toUpperCase().split('_');
-  // debugger;
-  let tickerPrice = useTickerPrice(pairName);
+  const tickerPrice = useTickerPrice(pairName);
 
   return (
     <Flex w="100%" borderBottomWidth={1} borderColor="gray.700">

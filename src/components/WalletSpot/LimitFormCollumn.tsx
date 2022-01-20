@@ -1,14 +1,16 @@
-import { Button, Flex, Stack, Text } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { InputWallet } from '../Form/InputWallet';
 import { SliderWallet } from './SliderWallet';
 import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
+import { useState } from 'react';
 
 interface LimitFormCollumnProps {
   criptoFrom: string;
   criptoTo: string;
   available: string;
   availableAssetName: string;
+  priceCryptoFrom?: string;
   deal: 'sell' | 'buy';
 }
 
@@ -17,8 +19,25 @@ export function LimitFormCollumn({
   criptoTo,
   available,
   availableAssetName,
+  priceCryptoFrom,
   deal,
 }: LimitFormCollumnProps) {
+  const taxSell = 0.005;
+  const maxSell = parseFloat(available) - taxSell; // 1,0001
+  console.log(maxSell);
+
+  const [amount, setAmount] = useState(null);
+  const handleChange = (event) => {
+    if (parseFloat(event.target.value) > maxSell) {
+      setAmount(maxSell);
+      return;
+    }
+    setAmount(event.target.value);
+  };
+  const totalSell = amount
+    ? (parseFloat(amount) * parseFloat(priceCryptoFrom)).toFixed(2)
+    : '';
+
   return (
     <Flex direction="column" flex="1 1 0%">
       <Flex justifyContent="space-between" fontSize="small" color="gray.300">
@@ -32,11 +51,22 @@ export function LimitFormCollumn({
           <InputWallet
             textLeft="Price"
             textRight={criptoFrom}
-            value="0.000123"
+            value={priceCryptoFrom}
           />
-          <InputWallet textLeft="Amount" textRight={criptoTo} />
+          <InputWallet
+            textLeft="Amount"
+            textRight={criptoTo}
+            max={maxSell}
+            value={amount}
+            onChange={handleChange}
+          />
           <SliderWallet />
-          <InputWallet textLeft="Total" textRight={criptoFrom} />
+          <InputWallet
+            textLeft="Total"
+            textRight={criptoFrom}
+            value={String(totalSell)}
+            type="text"
+          />
         </Stack>
         <Flex direction="column" marginTop="6">
           <ButtonWalletSpot

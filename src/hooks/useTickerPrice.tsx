@@ -8,7 +8,6 @@ const useTickerPrice = (pairName: string) => {
   const [price, setPrice] = useState(null);
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
-  debugger;
 
   useEffect(() => {
     ws.current = new WebSocket(process.env.NEXT_PUBLIC_STREAM_BINANCE_URL);

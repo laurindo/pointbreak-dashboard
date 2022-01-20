@@ -39,7 +39,7 @@ export default function Pair({ pair }: { pair: string }) {
             <OrderBook />
             <Flex width="100%" maxWidth={880} direction="column">
               <TradingViewChart />
-              <WalletSpot />
+              <WalletSpot pair={pair} pairName={pairName} />
             </Flex>
           </Flex>
         </Flex>
