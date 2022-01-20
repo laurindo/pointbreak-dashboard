@@ -15,17 +15,19 @@ import { LimitFormCollumn } from './LimitFormCollumn';
 import { MarketFormCollumn } from './MarketFormCollumn';
 import { StopLimitFormCollumn } from './StopLimitFormCollumn';
 import { OCOFormCollumn } from './OCOFormCollumn';
+import useTickerPrice from '@/hooks/useTickerPrice';
 
-export function WalletSpot() {
-  const router = useRouter();
-  const [pair, setPair] = useState('BTC_USDT');
+interface WalletSpotProps {
+  pair: string;
+  pairName: string;
+}
 
-  useEffect(() => {
-    if (router?.query?.pair) {
-      debugger;
-      setPair(String(router.query.pair));
-    }
-  }, [router]);
+export function WalletSpot({ pair, pairName }: WalletSpotProps) {
+  const symbol = pair.toUpperCase().split('_');
+  // const tickerPrice = useTickerPrice(pairName);
+  const priceCryptoFrom = '42452.30'; // Experimental
+  const availableCryptoFrom = '1.05'; // Experimental
+  const availableCryptoTo = '100.50'; // Experimental
 
   return (
     <Flex direction="column">
@@ -59,17 +61,21 @@ export function WalletSpot() {
           <TabPanel>
             <HStack spacing={6}>
               <LimitFormCollumn
-                criptoFrom={pair.split('_')[0]} // base asset
-                criptoTo={pair.split('_')[1]} // quote asset
-                available="0.00000000"
-                availableAssetName={pair.split('_')[0]}
+                criptoFrom={symbol[0]} // base asset
+                criptoTo={symbol[1]} // quote asset
+                available={availableCryptoTo} // actual amount criptoFrom
+                availableAssetName={symbol[1]}
+                // priceCryptoFrom={tickerPrice?.c ? tickerPrice.c : 0}
+                priceCryptoFrom={priceCryptoFrom}
                 deal="buy"
               />
               <LimitFormCollumn
-                criptoFrom={pair.split('_')[0]} // base asset
-                criptoTo={pair.split('_')[1]} // quote asset
-                available="0.00000000"
-                availableAssetName={pair.split('_')[1]}
+                criptoFrom={symbol[0]} // base asset
+                criptoTo={symbol[1]} // quote asset
+                available={availableCryptoFrom} // actual amount criptoTo
+                availableAssetName={symbol[0]}
+                // priceCryptoFrom={tickerPrice?.c ? tickerPrice.c : 0}
+                priceCryptoFrom={priceCryptoFrom}
                 deal="sell"
               />
             </HStack>

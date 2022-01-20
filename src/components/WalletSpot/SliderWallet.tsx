@@ -16,7 +16,7 @@ export function SliderWallet() {
     <Flex>
       <Slider
         id="slider"
-        defaultValue={5}
+        defaultValue={0}
         min={0}
         max={100}
         marginY="3"

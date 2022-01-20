@@ -1,21 +1,21 @@
-import { action } from 'easy-peasy'
+import { action } from 'easy-peasy';
 
 // Actions
 const setSelectedPair = action((state, payload) => {
-  state.selectedPair = payload
-})
+  state.selectedPair = payload;
+});
 
 const setPairs = action((state, payload) => {
-  state.pairs = payload
-})
+  state.pairs = payload;
+});
 
 const setFavoritePairs = action((state, payload) => {
-  debugger
-  const exists = state.favoritesPairs.some((pair) => pair === payload)
-  const newPairs = state.favoritesPairs.filter((pair) => pair !== payload)
-  const result = exists ? [...newPairs] : [...state.favoritesPairs, payload]
-  state.favoritesPairs = result
-})
+  // debugger
+  const exists = state.favoritesPairs.some((pair) => pair === payload);
+  const newPairs = state.favoritesPairs.filter((pair) => pair !== payload);
+  const result = exists ? [...newPairs] : [...state.favoritesPairs, payload];
+  state.favoritesPairs = result;
+});
 
 const state = {
   favoritesPairs: [],
@@ -26,6 +26,6 @@ const state = {
 
   selectedPair: null,
   setSelectedPair,
-}
+};
 
-export default state
+export default state;

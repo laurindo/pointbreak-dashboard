@@ -31,12 +31,12 @@ export default function Option({
       p="10px 20px"
       my="5px"
       borderRadius="5px"
-      border="solid 1px"
+      borderWidth={1}
       borderColor="gray.700"
       width="100%"
       alignItems="center"
       cursor="pointer"
-      _hover={{ backgroundColor: 'gray.800' }}
+      _hover={{ borderColor: 'blue.600' }}
     >
       <Image src={icon} alt={'Icon'} width="32px" height="32px" />
       <Flex flexDirection="column" ml="10px">

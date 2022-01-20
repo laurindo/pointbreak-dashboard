@@ -17,7 +17,6 @@ interface HeaderPairsProps {
   pair: string;
   pairName: string;
 }
-// Todo: Renomear o nome deste componente
 export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
   const symbol = pair.toUpperCase().split('_');
   const tickerPrice = useTickerPrice(pairName);

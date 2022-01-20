@@ -71,7 +71,7 @@ export function TableToCript({ data, height = '450px' }) {
           {filteredData.map((d) => (
             <Link href={`/trade/${d.pair.replace('/', '_')}`} key={d.key}>
               <Tr>
-                <Td>
+                <Td cursor="pointer">
                   <Flex>
                     <Icon as={FaStar} mr="5px" />
                     <Text fontSize="xs">{d.pair}</Text>

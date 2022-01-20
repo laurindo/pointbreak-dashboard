@@ -31,7 +31,7 @@ export function Header() {
       <Image src="/images/logo-horizontal.png" alt="Logo" height={50} />
 
       <Box as="nav" height="5" marginLeft="5">
-        <ItemMenuNav path="/">Home</ItemMenuNav>
+        <ItemMenuNav path="/trade/BTC_USDT">Home</ItemMenuNav>
         <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
       </Box>
 
@@ -45,8 +45,6 @@ export function Header() {
           borderRightWidth={1}
           borderColor="gray.700"
         >
-          {/* <Icon as={RiNotificationLine} fontSize="20" />
-          <Icon as={RiUserAddLine} fontSize="20" /> */}
           {account ? (
             <>
               <Box
@@ -63,7 +61,7 @@ export function Header() {
                 color="whiteAlpha.800"
               >
                 <Text display="flex" justifyContent="center" align="center">
-                  <Icon as={RiBitCoinLine} fontSize="19" marginRight="1" />
+                  <Icon as={RiWallet3Line} fontSize="19" marginRight="1" />
                   {account && shortenAddress(account)}
                 </Text>
               </Box>
@@ -80,7 +78,7 @@ export function Header() {
               >
                 <Text display="flex" justifyContent="center" align="center">
                   Balance: {balance}
-                  <Icon as={RiWallet3Line} fontSize="19" marginLeft="1" />
+                  <Icon as={RiBitCoinLine} fontSize="19" marginLeft="1" />
                 </Text>
               </Box>
             </>
