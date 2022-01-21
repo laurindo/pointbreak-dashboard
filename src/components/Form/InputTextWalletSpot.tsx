@@ -10,13 +10,19 @@ import React from 'react';
 interface InputTextWalletSpotProps extends InputProps {
   textRight: string;
   textLeft: string;
+  blockCharsOnlyNumber?: boolean;
 }
 
 export function InputTextWalletSpot({
   textRight,
   textLeft,
+  blockCharsOnlyNumber,
   ...rest
 }: InputTextWalletSpotProps) {
+  // Bloqueando caracters para o input number
+  const blockInvalidChar = (e: any) =>
+    ['e', 'E', '+', '-', '.'].includes(e.key) && e.preventDefault();
+
   return (
     <InputGroup size="md">
       <InputLeftElement
@@ -37,6 +43,7 @@ export function InputTextWalletSpot({
         fontSize="small"
         bgColor={'isDisabled' in rest ? 'gray.400' : 'gray.800'}
         borderWidth={0}
+        onKeyDown={rest['type'] == 'number' && blockInvalidChar}
         {...rest}
       />
 

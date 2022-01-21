@@ -25,10 +25,6 @@ export function LimitFormCollumn({
   maxTransacAllowed,
   deal,
 }: LimitFormCollumnProps) {
-  // block char in input number
-  const blockInvalidChar = (e: any) =>
-    ['e', 'E', '+', '-', '.'].includes(e.key) && e.preventDefault();
-
   // Price
   const [price, setPrice] = useState(priceCryptoFrom);
   const handleChangePrice = (event: any) => setPrice(event.target.value);
@@ -72,7 +68,6 @@ export function LimitFormCollumn({
         <Stack spacing={3}>
           <InputTextWalletSpot
             type="number"
-            onKeyDown={blockInvalidChar}
             textLeft="Price"
             textRight={criptoTransac}
             value={price}
@@ -80,7 +75,6 @@ export function LimitFormCollumn({
           />
           <InputTextWalletSpot
             type="number"
-            onKeyDown={blockInvalidChar}
             textLeft="Amount"
             textRight={criptoBase}
             value={amount}
