@@ -1,11 +1,22 @@
 import { useEffect, useState, useRef } from 'react';
 
+interface PriceProps {
+  c: string; // Last Price
+  o: string; // Open Price
+  h: string; // High price
+  l: string; // Low price
+  p: string; // Price change
+  P: string; // Price change percent
+  v: string; // Total traded base asset volume
+  q: string; // Total traded quote asset volume
+}
+
 const useTickerPrice = (pairName: string) => {
   const [pair, setPair] = useState(pairName);
   if (pairName != pair) {
     setPair(pairName);
   }
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState<PriceProps>(null);
   const [isPaused, setPause] = useState(false);
   const ws = useRef(null);
 

@@ -1,8 +1,8 @@
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
-import { InputWallet } from '../Form/InputWallet';
-import { SliderWallet } from './SliderWallet';
-import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
+import { SliderWallet } from '@/components/Form/SliderWallet';
+import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
+import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 
 interface MarketFormCollumnProps {
   criptoFrom: string;
@@ -27,14 +27,14 @@ export function MarketFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputWallet
-            textLeft="Price"
+          <InputWalletSpot
             type="text"
-            value="Mercado"
-            disabled
+            textLeft="Price"
             textRight={criptoFrom}
+            value="Mercado"
+            isDisabled
           />
-          <InputWallet textLeft="Amount" textRight={criptoTo} />
+          <InputWalletSpot textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />
         </Stack>
         <Flex direction="column" marginTop="6">

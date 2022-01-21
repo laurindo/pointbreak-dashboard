@@ -1,42 +1,59 @@
+import { useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
-import { InputWallet } from '../Form/InputWallet';
-import { SliderWallet } from './SliderWallet';
-import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
-import { useState } from 'react';
+import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
+import { SliderWallet } from '@/components/Form/SliderWallet';
+import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
 interface LimitFormCollumnProps {
-  criptoFrom: string;
-  criptoTo: string;
+  criptoTransac: string;
+  criptoBase: string;
   available: string;
   availableAssetName: string;
   priceCryptoFrom?: string;
+  maxTransacAllowed: number;
   deal: 'sell' | 'buy';
 }
 
 export function LimitFormCollumn({
-  criptoFrom,
-  criptoTo,
+  criptoTransac,
+  criptoBase,
   available,
   availableAssetName,
   priceCryptoFrom,
+  maxTransacAllowed,
   deal,
 }: LimitFormCollumnProps) {
-  const taxSell = 0.005;
-  const maxSell = parseFloat(available) - taxSell; // 1,0001
-  console.log(maxSell);
+  // Price
+  const [price, setPrice] = useState(priceCryptoFrom);
+  const handleChangePrice = (event: any) => setPrice(event.target.value);
 
-  const [amount, setAmount] = useState(null);
-  const handleChange = (event) => {
-    if (parseFloat(event.target.value) > maxSell) {
-      setAmount(maxSell);
+  // Amount
+  const [amount, setAmount] = useState('');
+  const handleChangeAmount = (event: any) => {
+    if (parseFloat(event.target.value) > maxTransacAllowed) {
+      setAmount(String(maxTransacAllowed));
+      setSliderValue((maxTransacAllowed * 100) / maxTransacAllowed);
       return;
     }
     setAmount(event.target.value);
+    setSliderValue(
+      ((parseFloat(event.target.value) * 100) / maxTransacAllowed) | 0,
+    );
   };
+
+  // Total Sell
   const totalSell = amount
-    ? (parseFloat(amount) * parseFloat(priceCryptoFrom)).toFixed(2)
+    ? String((parseFloat(amount) * parseFloat(priceCryptoFrom)).toFixed(4))
     : '';
+
+  // Slider
+  const [sliderValue, setSliderValue] = useState(0);
+  const handleChangeSlider = (event: any) => {
+    setAmount(String(maxTransacAllowed * (event / 100)));
+    console.log(maxTransacAllowed);
+    setSliderValue(event);
+  };
 
   return (
     <Flex direction="column" flex="1 1 0%">
@@ -48,31 +65,38 @@ export function LimitFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputWallet
+          <InputWalletSpot
+            type="number"
             textLeft="Price"
-            textRight={criptoFrom}
-            value={priceCryptoFrom}
+            textRight={criptoTransac}
+            value={price}
+            onChange={handleChangePrice}
           />
-          <InputWallet
+          <InputWalletSpot
+            type="number"
             textLeft="Amount"
-            textRight={criptoTo}
-            max={maxSell}
+            textRight={criptoBase}
             value={amount}
-            onChange={handleChange}
+            onChange={handleChangeAmount}
           />
-          <SliderWallet />
-          <InputWallet
+          <SliderWallet
+            value={sliderValue}
+            valueTooltip={sliderValue}
+            onChange={handleChangeSlider}
+          />
+          <InputWalletSpot
+            type="number"
             textLeft="Total"
-            textRight={criptoFrom}
-            value={String(totalSell)}
-            type="text"
+            textRight={criptoTransac}
+            value={totalSell}
+            isReadOnly
           />
         </Stack>
         <Flex direction="column" marginTop="6">
           <ButtonWalletSpot
             type="submit"
             colorScheme={deal == 'buy' ? 'green' : 'red'}
-            currency={criptoTo}
+            currency={criptoBase}
             deal={deal}
           />
         </Flex>

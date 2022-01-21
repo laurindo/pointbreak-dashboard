@@ -23,11 +23,28 @@ interface WalletSpotProps {
 }
 
 export function WalletSpot({ pair, pairName }: WalletSpotProps) {
-  const symbol = pair.toUpperCase().split('_');
+  const criptoBase = pair.toUpperCase().split('_')[0];
+  const criptoTransac = pair.toUpperCase().split('_')[1];
   // const tickerPrice = useTickerPrice(pairName);
-  const priceCryptoFrom = '42452.30'; // Experimental
-  const availableCryptoFrom = '1.05'; // Experimental
-  const availableCryptoTo = '100.50'; // Experimental
+
+  // Ainda não capturado do WebSocket
+  const priceCryptoBaseInCryptoTransac = '419.0'; // Experimental BNB_BUSD - quanto custa BNB em BUSD
+  const availableCryptoBase = '0.03345008'; // Experimental BNB_BUSD - quanto tenho na carteira de BNB
+  const availableCryptoTransac = '100.50'; // Experimental BNB_BUSD - quanto tenho na carteira de BUSD
+
+  // Provável taxa de compra e venda
+  // Não sei se é assim que é pensada as taxas de compra e venda, ou se simplesmente a Binance não deixa o cara tirar
+  // abaixo de X casas decimais, ou se é outra regra, precisamos descobrir isso.
+  const taxBuy = 0.05; // Experimental: Taxa de 5%
+  const taxSell = 0.05; // Experimental: Taxa 5%
+  const maxTransacAllowedSell =
+    parseFloat(availableCryptoBase) - parseFloat(availableCryptoBase) * taxSell;
+  const maxTransacAllowedBuy =
+    parseFloat(availableCryptoTransac) /
+      parseFloat(priceCryptoBaseInCryptoTransac) -
+    (parseFloat(availableCryptoTransac) /
+      parseFloat(priceCryptoBaseInCryptoTransac)) *
+      taxBuy;
 
   return (
     <Flex direction="column">
@@ -61,21 +78,21 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
           <TabPanel>
             <HStack spacing={6}>
               <LimitFormCollumn
-                criptoFrom={symbol[0]} // base asset
-                criptoTo={symbol[1]} // quote asset
-                available={availableCryptoTo} // actual amount criptoFrom
-                availableAssetName={symbol[1]}
-                // priceCryptoFrom={tickerPrice?.c ? tickerPrice.c : 0}
-                priceCryptoFrom={priceCryptoFrom}
+                criptoTransac={criptoTransac} // base asset
+                criptoBase={criptoBase} // quote asset
+                available={availableCryptoTransac} // actual amount criptoFrom
+                availableAssetName={criptoTransac}
+                priceCryptoFrom={priceCryptoBaseInCryptoTransac}
+                maxTransacAllowed={maxTransacAllowedBuy}
                 deal="buy"
               />
               <LimitFormCollumn
-                criptoFrom={symbol[0]} // base asset
-                criptoTo={symbol[1]} // quote asset
-                available={availableCryptoFrom} // actual amount criptoTo
-                availableAssetName={symbol[0]}
-                // priceCryptoFrom={tickerPrice?.c ? tickerPrice.c : 0}
-                priceCryptoFrom={priceCryptoFrom}
+                criptoTransac={criptoTransac} // base asset
+                criptoBase={criptoBase} // quote asset
+                available={availableCryptoBase} // actual amount criptoTo
+                availableAssetName={criptoBase}
+                priceCryptoFrom={priceCryptoBaseInCryptoTransac}
+                maxTransacAllowed={maxTransacAllowedSell}
                 deal="sell"
               />
             </HStack>
