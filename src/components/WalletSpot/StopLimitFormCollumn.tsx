@@ -1,8 +1,8 @@
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
-import { InputWallet } from '../Form/InputWallet';
-import { SliderWallet } from './SliderWallet';
-import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
+import { SliderWallet } from '@/components/Form/SliderWallet';
+import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
+import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 
 interface StopLimitFormCollumnProps {
   criptoFrom: string;
@@ -27,15 +27,15 @@ export function StopLimitFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputWallet textLeft="Stop" textRight={criptoFrom} />
-          <InputWallet
+          <InputWalletSpot textLeft="Stop" textRight={criptoFrom} />
+          <InputWalletSpot
             textLeft="Limit"
             textRight={criptoFrom}
             value="0.000123"
           />
-          <InputWallet textLeft="Amount" textRight={criptoTo} />
+          <InputWalletSpot textLeft="Amount" textRight={criptoTo} />
           <SliderWallet />
-          <InputWallet textLeft="Total" textRight={criptoFrom} />
+          <InputWalletSpot textLeft="Total" textRight={criptoFrom} />
         </Stack>
         <Flex direction="column" marginTop="6">
           <ButtonWalletSpot

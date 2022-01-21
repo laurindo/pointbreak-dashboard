@@ -7,18 +7,18 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-interface InputTextWalletSpotProps extends InputProps {
+interface InputWalletSpotProps extends InputProps {
   textRight: string;
   textLeft: string;
   blockCharsOnlyNumber?: boolean;
 }
 
-export function InputTextWalletSpot({
+export function InputWalletSpot({
   textRight,
   textLeft,
   blockCharsOnlyNumber,
   ...rest
-}: InputTextWalletSpotProps) {
+}: InputWalletSpotProps) {
   // Bloqueando caracters para o input number
   const blockInvalidChar = (e: any) =>
     ['e', 'E', '+', '-', '.'].includes(e.key) && e.preventDefault();

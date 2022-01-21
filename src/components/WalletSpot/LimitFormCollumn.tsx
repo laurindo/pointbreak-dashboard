@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
-import { SliderWallet } from './SliderWallet';
-import { ButtonWalletSpot } from '../Form/ButtonWalletSpot';
-
-import { InputTextWalletSpot } from '@/components/Form/InputTextWalletSpot';
+import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
+import { SliderWallet } from '@/components/Form/SliderWallet';
+import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
 interface LimitFormCollumnProps {
   criptoTransac: string;
@@ -66,14 +65,14 @@ export function LimitFormCollumn({
       </Flex>
       <Flex as="form" direction="column" marginTop="1">
         <Stack spacing={3}>
-          <InputTextWalletSpot
+          <InputWalletSpot
             type="number"
             textLeft="Price"
             textRight={criptoTransac}
             value={price}
             onChange={handleChangePrice}
           />
-          <InputTextWalletSpot
+          <InputWalletSpot
             type="number"
             textLeft="Amount"
             textRight={criptoBase}
@@ -85,7 +84,7 @@ export function LimitFormCollumn({
             valueTooltip={sliderValue}
             onChange={handleChangeSlider}
           />
-          <InputTextWalletSpot
+          <InputWalletSpot
             type="number"
             textLeft="Total"
             textRight={criptoTransac}
