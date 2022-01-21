@@ -2,17 +2,6 @@ import useTickerPrice from '@/hooks/useTickerPrice';
 import { Flex, Text, Icon, HStack, Box, Link } from '@chakra-ui/react';
 import { RiCoinsLine } from 'react-icons/ri';
 
-interface TickerPrice {
-  c: string; // Last Price
-  o: string; // Open Price
-  h: string; // High price
-  l: string; // Low price
-  p: string; // Price change
-  P: string; // Price change percent
-  v: string; // Total traded base asset volume
-  q: string; // Total traded quote asset volume
-}
-
 interface HeaderPairsProps {
   pair: string;
   pairName: string;

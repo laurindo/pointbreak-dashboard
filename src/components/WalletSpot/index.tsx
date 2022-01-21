@@ -41,10 +41,10 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
     parseFloat(availableCryptoBase) - parseFloat(availableCryptoBase) * taxSell;
   const maxTransacAllowedBuy =
     parseFloat(availableCryptoTransac) /
-    parseFloat(priceCryptoBaseInCryptoTransac); // -
-  // (parseFloat(availableCryptoTransac) /
-  //   parseFloat(priceCryptoBaseInCryptoTransac)) *
-  //   taxBuy;
+      parseFloat(priceCryptoBaseInCryptoTransac) -
+    (parseFloat(availableCryptoTransac) /
+      parseFloat(priceCryptoBaseInCryptoTransac)) *
+      taxBuy;
 
   return (
     <Flex direction="column">
