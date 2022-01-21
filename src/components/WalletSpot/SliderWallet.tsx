@@ -6,11 +6,15 @@ import {
   SliderThumb,
   SliderTrack,
   Tooltip,
+  SliderProps,
 } from '@chakra-ui/react';
 import React from 'react';
 
-export function SliderWallet() {
-  const [sliderValue, setSliderValue] = React.useState(5);
+interface SliderWalletProps extends SliderProps {
+  valueTooltip?: number;
+}
+
+export function SliderWallet({ valueTooltip, ...rest }: SliderWalletProps) {
   const [showTooltip, setShowTooltip] = React.useState(false);
   return (
     <Flex>
@@ -21,9 +25,10 @@ export function SliderWallet() {
         max={100}
         marginY="3"
         colorScheme="teal"
-        onChange={(v) => setSliderValue(v)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
+        focusThumbOnChange={false}
+        {...rest}
       >
         <SliderMark value={25} mt="1" ml="-2.5" fontSize="sm">
           25%
@@ -43,7 +48,7 @@ export function SliderWallet() {
           color="white"
           placement="top"
           isOpen={showTooltip}
-          label={`${sliderValue}%`}
+          label={`${valueTooltip}%`}
         >
           <SliderThumb />
         </Tooltip>
