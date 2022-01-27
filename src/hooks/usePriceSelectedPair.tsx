@@ -2,9 +2,9 @@ import { request, gql } from 'graphql-request';
 import useSWRImmutable from 'swr/immutable';
 
 const query = gql`
-  query ExampleQuery($symbol: String!) {
-    listSymbolsByName(symbol: $symbol) {
-      symbols
+  query PriceForSelectedPair($symbol: String!) {
+    priceForSymbol(symbol: $symbol) {
+      listPriceForSymbol
     }
   }
 `;
@@ -12,7 +12,7 @@ const query = gql`
 const fetcher = (query, symbol) =>
   request(process.env.NEXT_PUBLIC_SERVER_URL, query, { symbol });
 
-export default function useSymbolsByName(symbol: string) {
+export default function usePriceSelectedPair(symbol: string) {
   const { data } = useSWRImmutable([query, symbol], fetcher);
-  return data?.listSymbolsByName?.symbols;
+  return data?.priceForSymbol?.listPriceForSymbol?.price;
 }

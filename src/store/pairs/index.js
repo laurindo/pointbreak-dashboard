@@ -5,6 +5,10 @@ const setSelectedPair = action((state, payload) => {
   state.selectedPair = payload;
 });
 
+const setValueSelectedPair = action((state, payload) => {
+  state.valueSelectedPair = payload;
+});
+
 const setPairs = action((state, payload) => {
   state.pairs = payload;
 });
@@ -26,6 +30,9 @@ const state = {
 
   selectedPair: null,
   setSelectedPair,
+
+  valueSelectedPair: '',
+  setValueSelectedPair,
 };
 
 export default state;

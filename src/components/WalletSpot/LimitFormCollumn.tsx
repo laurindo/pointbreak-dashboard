@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
@@ -25,7 +25,10 @@ export function LimitFormCollumn({
   deal,
 }: LimitFormCollumnProps) {
   // Price
-  const [price, setPrice] = useState(priceCryptoFrom);
+  const [price, setPrice] = useState('');
+  useEffect(() => {
+    setPrice(priceCryptoFrom);
+  }, [priceCryptoFrom]);
   const handleChangePrice = (event: any) => setPrice(event.target.value);
 
   // Amount
@@ -44,7 +47,7 @@ export function LimitFormCollumn({
 
   // Total Sell
   const totalSell = amount
-    ? String((parseFloat(amount) * parseFloat(priceCryptoFrom)).toFixed(4))
+    ? String((parseFloat(amount) * parseFloat(price)).toFixed(4))
     : '';
 
   // Slider
