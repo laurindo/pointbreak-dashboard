@@ -16,10 +16,17 @@ import { StopLimitFormCollumn } from './StopLimitFormCollumn';
 import { OCOFormCollumn } from './OCOFormCollumn';
 
 import usePriceSelectedPair from '@/hooks/usePriceSelectedPair';
+import { sizeDecimal } from '@/utils/sizeDecimal';
 
 interface WalletSpotProps {
   pair: string;
   pairName: string;
+}
+
+interface PriceProps {
+  price: string;
+  tickSize: string;
+  stepSize: string;
 }
 
 export function WalletSpot({ pair, pairName }: WalletSpotProps) {
@@ -27,9 +34,19 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
   const criptoTransac = pair.toUpperCase().split('_')[1];
 
   const priceSelectedPair = usePriceSelectedPair(pairName.toUpperCase());
-  const priceCryptoBaseInCryptoTransac = priceSelectedPair
-    ? priceSelectedPair
-    : '0'; // Experimental BNB_BUSD - quanto custa BNB em BUSD
+  const priceFormat = (priceSelectedPair: PriceProps) => {
+    if (
+      priceSelectedPair &&
+      priceSelectedPair.price &&
+      priceSelectedPair.tickSize
+    ) {
+      return sizeDecimal(priceSelectedPair.price, priceSelectedPair.tickSize);
+    } else {
+      return '0';
+    }
+  };
+
+  const priceCryptoBaseInCryptoTransac = priceFormat(priceSelectedPair); // Experimental BNB_BUSD - quanto custa BNB em BUSD
 
   const availableCryptoBase = '0.03345008'; // Experimental BNB_BUSD - quanto tenho na carteira de BNB
   const availableCryptoTransac = '100.50'; // Experimental BNB_BUSD - quanto tenho na carteira de BUSD
@@ -86,6 +103,8 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 availableAssetName={criptoTransac}
                 priceCryptoFrom={priceCryptoBaseInCryptoTransac}
                 maxTransacAllowed={maxTransacAllowedBuy}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
                 deal="buy"
               />
               <LimitFormCollumn
@@ -95,6 +114,8 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 availableAssetName={criptoBase}
                 priceCryptoFrom={priceCryptoBaseInCryptoTransac}
                 maxTransacAllowed={maxTransacAllowedSell}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
                 deal="sell"
               />
             </HStack>

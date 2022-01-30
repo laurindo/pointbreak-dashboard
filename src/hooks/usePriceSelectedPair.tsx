@@ -6,6 +6,9 @@ const query = gql`
     priceForSymbol(symbol: $symbol) {
       listPriceForSymbol
     }
+    listSymbolsForPair(symbol: $symbol) {
+      symbols
+    }
   }
 `;
 
@@ -14,5 +17,9 @@ const fetcher = (query, symbol) =>
 
 export default function usePriceSelectedPair(symbol: string) {
   const { data } = useSWRImmutable([query, symbol], fetcher);
-  return data?.priceForSymbol?.listPriceForSymbol?.price;
+  return {
+    price: data?.priceForSymbol?.listPriceForSymbol?.price,
+    tickSize: data?.listSymbolsForPair?.symbols[0]?.filters[0]?.tickSize,
+    stepSize: data?.listSymbolsForPair?.symbols[0]?.filters[2]?.stepSize,
+  };
 }

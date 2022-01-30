@@ -5,6 +5,8 @@ import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 import { SliderWallet } from '@/components/Form/SliderWallet';
 import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
+import { sizeDecimal } from '@/utils/sizeDecimal';
+
 interface LimitFormCollumnProps {
   criptoTransac: string;
   criptoBase: string;
@@ -12,6 +14,8 @@ interface LimitFormCollumnProps {
   availableAssetName: string;
   priceCryptoFrom?: string;
   maxTransacAllowed: number;
+  priceSize: string;
+  amountSize: string;
   deal: 'sell' | 'buy';
 }
 
@@ -22,17 +26,33 @@ export function LimitFormCollumn({
   availableAssetName,
   priceCryptoFrom,
   maxTransacAllowed,
+  priceSize,
+  amountSize,
   deal,
 }: LimitFormCollumnProps) {
-  // Price
-  const [price, setPrice] = useState('');
+  let nPriceSize = priceSize && String(Number(priceSize)).split('.')[1].length;
+  // Estado do Price
+  const [price, setPrice] = useState(priceCryptoFrom);
   useEffect(() => {
     setPrice(priceCryptoFrom);
   }, [priceCryptoFrom]);
-  const handleChangePrice = (event: any) => setPrice(event.target.value);
 
-  // Amount
+  // Editando Price
+  const handleChangePrice = (event: any) => {
+    const nDecimalPrice =
+      event.target.value.split('.')[1] &&
+      event.target.value.split('.')[1].length;
+    if (nPriceSize && nDecimalPrice && nDecimalPrice > nPriceSize) {
+      setPrice(sizeDecimal(event.target.value, priceSize));
+    } else {
+      setPrice(event.target.value);
+    }
+  };
+
+  // Estado do Amount
   const [amount, setAmount] = useState('');
+
+  // Editando o Amount
   const handleChangeAmount = (event: any) => {
     if (parseFloat(event.target.value) > maxTransacAllowed) {
       setAmount(String(maxTransacAllowed));
