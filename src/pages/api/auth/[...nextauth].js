@@ -77,36 +77,6 @@ export default NextAuth({
         }
       },
     }),
-    EmailProvider({
-      server: {
-        host: 'smtp.sendgrid.net',
-        port: 587,
-        auth: {
-          user: 'apikey',
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
-      },
-      from: 'support@pointbreak.com',
-      async sendVerificationRequest({
-        identifier: email,
-        url,
-        provider: { server, from },
-      }) {
-        try {
-          const { host } = new URL(url);
-          const transport = nodemailer.createTransport(server);
-          await transport.sendMail({
-            to: email,
-            from,
-            subject: `Sign in to ${host}`,
-            text: text({ url, host }),
-            html: html({ url, host: `${host}`, email }),
-          });
-        } catch (err) {
-          throw new Error(err);
-        }
-      },
-    }),
   ],
   secret: process.env.RANDOM_JWT_SECRET,
   session: {
@@ -114,39 +84,4 @@ export default NextAuth({
     maxAge: THIRTY_DAYS,
     updateAge: THIRTY_MINUTES,
   },
-  theme: {
-    colorScheme: 'auto', // "auto" | "dark" | "light"
-    brandColor: '#63c', // Hex color code
-    logo: 'https://res.cloudinary.com/luneswallet/image/upload/c_scale,w_127/v1642213583/cripto-app/public/Logo_CriptoApp_2.png', // Absolute URL to image
-  } /*,
-  logger: {
-    error(code, metadata) {
-      log.error(code, metadata);
-    },
-    warn(code) {
-      log.warn(code);
-    },
-    debug(code, metadata) {
-      log.debug(code, metadata);
-    }
-  }*/,
 });
-
-function html({ url, host, email }) {
-  const escapedEmail = `${email.replace(/\./g, '&#8203;.')}`;
-  const escapedHost = `${host.replace(/\./g, '&#8203;.')}`;
-  // Your email template here
-  return `
-      <body>
-        <h1>Your magic link! 🪄</h1>
-        <h3>Your email is ${escapedEmail}</h3>
-        <p>
-          <a href="${url}">Sign in to ${escapedHost}</a>
-      </body>
-  `;
-}
-
-// Fallback for non-HTML email clients
-function text({ url, host }) {
-  return `Sign in to ${host}\n${url}\n\n`;
-}
