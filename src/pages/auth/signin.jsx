@@ -18,7 +18,10 @@ import {
   FormHelperText,
   Spinner,
   useToast,
+  Image,
 } from '@chakra-ui/react';
+
+import {PAIR_DEFAULT} from '@/constants/configs'
 
 const LoginForm = ({ providers, csrfToken }) => {
   const router = useRouter();
@@ -54,15 +57,17 @@ const LoginForm = ({ providers, csrfToken }) => {
   const handlePassChange = (e) => setPass(e.target.value);
 
   return (
-    <Flex w="100vw" h="100vh" align="center" justify="center">
+    <Flex direction="column" w="100vw" h="100vh" align="center" justify="center">
+      <Image marginBottom="8" src="/images/logo-horizontal.png" alt="Logo" height={50} />
       <Flex
         as="form"
         width="100%"
         maxWidth={360}
         bg="gray.800"
-        p="8"
+        p="5"
         borderRadius={8}
         flexDir="column"
+        onSubmit={onSigninWithCredentials}
       >
         <Stack spacing={4}>
           <FormLabel htmlFor="email">Email</FormLabel>
@@ -88,7 +93,7 @@ const LoginForm = ({ providers, csrfToken }) => {
           mt={6}
           colorScheme="pink"
           size="lg"
-          onClick={onSigninWithCredentials}
+          type='submit'
         >
           {isLoading ? <Spinner size="sm" /> : 'Sign in'}
         </Button>
@@ -107,7 +112,7 @@ export async function getServerSideProps(context) {
 
   if (session) {
     return {
-      redirect: { destination: '/trade/BNB_BTC' },
+      redirect: { destination: `/trade/${PAIR_DEFAULT}` },
     };
   }
 
