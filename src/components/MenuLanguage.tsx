@@ -50,21 +50,6 @@ export function MenuLanguage({ actualLanguage }: MenuLanguageProps) {
           Português
         </MenuItem>
       </MenuList>
-      <Button
-        rightIcon={<FaSignOutAlt />}
-        bgColor="gray.800"
-        borderWidth={2}
-        borderColor="gray.700"
-        color="whiteAlpha.800"
-        fontWeight="light"
-        outline={0}
-        _hover={{ borderColor: 'gray.700' }}
-        _active={{ borderColor: 'gray.700' }}
-        _focus={{ outline: 0 }}
-        onClick={() => signOut()}
-      >
-        Signout
-      </Button>
     </Menu>
   );
 }

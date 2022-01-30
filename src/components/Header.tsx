@@ -1,4 +1,13 @@
-import { Flex, Text, Icon, HStack, Box, Avatar, Image } from '@chakra-ui/react';
+import {
+  Flex,
+  Text,
+  Icon,
+  HStack,
+  Box,
+  Avatar,
+  Image,
+  Button,
+} from '@chakra-ui/react';
 import { RiWallet3Line, RiBitCoinLine } from 'react-icons/ri';
 import { ItemMenuNav } from './ItemMenuNav';
 import { useActiveWeb3React } from '@/services/web3';
@@ -6,16 +15,19 @@ import Web3Network from '@/components/Web3Network';
 import Web3Status from '@/components/Web3Status';
 import useBalance from '@/hooks/useBalance';
 import { shortenAddress } from '@/utils/format';
+import { PAIR_DEFAULT } from '@/constants/configs';
 import { MenuLanguage } from './MenuLanguage';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { signOut } from 'next-auth/react';
 
 export function Header() {
   const { account, chainId, library } = useActiveWeb3React();
 
   const balance = useBalance(account);
-  // debugger;
 
   // data experimental para formar o componente de language
   const languageSetted = 'English';
+  const urlHomeDefault = `/trade/${PAIR_DEFAULT}`;
 
   return (
     <Flex
@@ -31,7 +43,7 @@ export function Header() {
       <Image src="/images/logo-horizontal.png" alt="Logo" height={50} />
 
       <Box as="nav" height="5" marginLeft="5">
-        <ItemMenuNav path="/trade/BTC_USDT">Home</ItemMenuNav>
+        <ItemMenuNav path={urlHomeDefault}>Home</ItemMenuNav>
         <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
       </Box>
 
@@ -96,7 +108,24 @@ export function Header() {
         </HStack>
 
         <Flex align="center">
-          <MenuLanguage actualLanguage={languageSetted} />
+          <HStack spacing={4}>
+            <MenuLanguage actualLanguage={languageSetted} />
+            <Button
+              rightIcon={<FaSignOutAlt />}
+              bgColor="gray.800"
+              borderWidth={2}
+              borderColor="gray.700"
+              color="whiteAlpha.800"
+              fontWeight="light"
+              outline={0}
+              _hover={{ borderColor: 'gray.700' }}
+              _active={{ borderColor: 'gray.700' }}
+              _focus={{ outline: 0 }}
+              onClick={() => signOut()}
+            >
+              Signout
+            </Button>
+          </HStack>
         </Flex>
       </Flex>
     </Flex>
