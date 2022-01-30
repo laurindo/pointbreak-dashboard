@@ -35,7 +35,6 @@ const Signup = () => {
   };
 
   const onSigninWithCredentials = async (e) => {
-    debugger;
     e.preventDefault();
     if (!validateEmail(email)) {
       return openNotification('Error', 'All Fields are required', 'error');

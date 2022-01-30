@@ -43,7 +43,6 @@ const LoginForm = ({ providers, csrfToken }) => {
 
   const onSigninWithCredentials = (e) => {
     e.preventDefault();
-    debugger;
     if (!validateEmail(email)) {
       return openNotification('Error', 'All Fields are required', 'error');
     }
