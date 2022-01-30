@@ -1,5 +1,5 @@
 import { request } from 'graphql-request';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 const QUERY = `{
   allPrice {
@@ -10,6 +10,6 @@ const QUERY = `{
 const fetcher = (query) => request(process.env.NEXT_PUBLIC_SERVER_URL, query);
 
 export default function usePrices() {
-  const { data } = useSWR(QUERY, fetcher);
+  const { data } = useSWRImmutable(QUERY, fetcher);
   return data?.allPrice?.listAllPrice;
 }

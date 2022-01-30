@@ -1,5 +1,5 @@
 import { request, gql } from 'graphql-request';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 const query = gql`
   query ExampleQuery($symbol: String!) {
@@ -13,6 +13,6 @@ const fetcher = (query, symbol) =>
   request(process.env.NEXT_PUBLIC_SERVER_URL, query, { symbol });
 
 export default function useSymbolsByName(symbol: string) {
-  const { data } = useSWR([query, symbol], fetcher);
+  const { data } = useSWRImmutable([query, symbol], fetcher);
   return data?.listSymbolsByName?.symbols;
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Flex,
@@ -8,27 +9,45 @@ import {
   TabPanel,
   HStack,
 } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 import { LimitFormCollumn } from './LimitFormCollumn';
 import { MarketFormCollumn } from './MarketFormCollumn';
 import { StopLimitFormCollumn } from './StopLimitFormCollumn';
 import { OCOFormCollumn } from './OCOFormCollumn';
-import useTickerPrice from '@/hooks/useTickerPrice';
+
+import usePriceSelectedPair from '@/hooks/usePriceSelectedPair';
+import { sizeDecimal } from '@/utils/sizeDecimal';
 
 interface WalletSpotProps {
   pair: string;
   pairName: string;
 }
 
+interface PriceProps {
+  price: string;
+  tickSize: string;
+  stepSize: string;
+}
+
 export function WalletSpot({ pair, pairName }: WalletSpotProps) {
   const criptoBase = pair.toUpperCase().split('_')[0];
   const criptoTransac = pair.toUpperCase().split('_')[1];
-  // const tickerPrice = useTickerPrice(pairName);
 
-  // Ainda não capturado do WebSocket
-  const priceCryptoBaseInCryptoTransac = '419.0'; // Experimental BNB_BUSD - quanto custa BNB em BUSD
+  const priceSelectedPair = usePriceSelectedPair(pairName.toUpperCase());
+  const priceFormat = (priceSelectedPair: PriceProps) => {
+    if (
+      priceSelectedPair &&
+      priceSelectedPair.price &&
+      priceSelectedPair.tickSize
+    ) {
+      return sizeDecimal(priceSelectedPair.price, priceSelectedPair.tickSize);
+    } else {
+      return '0';
+    }
+  };
+
+  const priceCryptoBaseInCryptoTransac = priceFormat(priceSelectedPair); // Experimental BNB_BUSD - quanto custa BNB em BUSD
+
   const availableCryptoBase = '0.03345008'; // Experimental BNB_BUSD - quanto tenho na carteira de BNB
   const availableCryptoTransac = '100.50'; // Experimental BNB_BUSD - quanto tenho na carteira de BUSD
 
@@ -63,7 +82,7 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
           <Tab fontSize="small" _focus={{ outline: '0' }}>
             Limite
           </Tab>
-          <Tab fontSize="small" _focus={{ outline: '0' }}>
+          {/* <Tab fontSize="small" _focus={{ outline: '0' }}>
             Market Order
           </Tab>
           <Tab fontSize="small" _focus={{ outline: '0' }}>
@@ -71,7 +90,7 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
           </Tab>
           <Tab fontSize="small" _focus={{ outline: '0' }}>
             OCO
-          </Tab>
+          </Tab> */}
         </TabList>
 
         <TabPanels>
@@ -84,6 +103,8 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 availableAssetName={criptoTransac}
                 priceCryptoFrom={priceCryptoBaseInCryptoTransac}
                 maxTransacAllowed={maxTransacAllowedBuy}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
                 deal="buy"
               />
               <LimitFormCollumn
@@ -93,11 +114,13 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 availableAssetName={criptoBase}
                 priceCryptoFrom={priceCryptoBaseInCryptoTransac}
                 maxTransacAllowed={maxTransacAllowedSell}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
                 deal="sell"
               />
             </HStack>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <HStack spacing={6}>
               <MarketFormCollumn
                 criptoFrom="ETH"
@@ -144,7 +167,7 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 deal="sell"
               />
             </HStack>
-          </TabPanel>
+          </TabPanel> */}
         </TabPanels>
       </Tabs>
     </Flex>

@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 import { SliderWallet } from '@/components/Form/SliderWallet';
 import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
+
+import { sizeDecimal } from '@/utils/sizeDecimal';
 
 interface LimitFormCollumnProps {
   criptoTransac: string;
@@ -12,6 +14,8 @@ interface LimitFormCollumnProps {
   availableAssetName: string;
   priceCryptoFrom?: string;
   maxTransacAllowed: number;
+  priceSize: string;
+  amountSize: string;
   deal: 'sell' | 'buy';
 }
 
@@ -22,14 +26,33 @@ export function LimitFormCollumn({
   availableAssetName,
   priceCryptoFrom,
   maxTransacAllowed,
+  priceSize,
+  amountSize,
   deal,
 }: LimitFormCollumnProps) {
-  // Price
+  let nPriceSize = priceSize && String(Number(priceSize)).split('.')[1].length;
+  // Estado do Price
   const [price, setPrice] = useState(priceCryptoFrom);
-  const handleChangePrice = (event: any) => setPrice(event.target.value);
+  useEffect(() => {
+    setPrice(priceCryptoFrom);
+  }, [priceCryptoFrom]);
 
-  // Amount
+  // Editando Price
+  const handleChangePrice = (event: any) => {
+    const nDecimalPrice =
+      event.target.value.split('.')[1] &&
+      event.target.value.split('.')[1].length;
+    if (nPriceSize && nDecimalPrice && nDecimalPrice > nPriceSize) {
+      setPrice(sizeDecimal(event.target.value, priceSize));
+    } else {
+      setPrice(event.target.value);
+    }
+  };
+
+  // Estado do Amount
   const [amount, setAmount] = useState('');
+
+  // Editando o Amount
   const handleChangeAmount = (event: any) => {
     if (parseFloat(event.target.value) > maxTransacAllowed) {
       setAmount(String(maxTransacAllowed));
@@ -44,7 +67,7 @@ export function LimitFormCollumn({
 
   // Total Sell
   const totalSell = amount
-    ? String((parseFloat(amount) * parseFloat(priceCryptoFrom)).toFixed(4))
+    ? String((parseFloat(amount) * parseFloat(price)).toFixed(4))
     : '';
 
   // Slider
