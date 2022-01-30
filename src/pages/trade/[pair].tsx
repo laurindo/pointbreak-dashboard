@@ -6,6 +6,7 @@ import { OrderBook } from '@/components/OrderBook';
 import { TradingViewChart } from '@/components/TradingViewChart';
 import { WalletSpot } from '@/components/WalletSpot';
 import { MarketPairs } from '@/components/MarketPairs';
+import { getSession } from 'next-auth/react';
 
 export default function Pair({ pair }: { pair: string }) {
   const router = useRouter();
@@ -49,6 +50,21 @@ export default function Pair({ pair }: { pair: string }) {
   );
 }
 
-Pair.getInitialProps = async (ctx) => {
-  return { pair: ctx.query.pair };
+export const getServerSideProps = async (ctx) => {
+  // Check if the user is authenticated from the server
+  const session = await getSession(ctx);
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth/signin',
+      },
+      props: {},
+    };
+  }
+  return {
+    props: {
+      pair: ctx.query.pair,
+    },
+  };
 };
