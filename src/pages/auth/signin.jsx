@@ -22,6 +22,7 @@ import {
 } from '@chakra-ui/react';
 
 import {PAIR_DEFAULT} from '@/constants/configs'
+import BackgroundAnimated from '@/components/BackgroundAnimated'
 
 const LoginForm = ({ providers, csrfToken }) => {
   const router = useRouter();
@@ -57,52 +58,54 @@ const LoginForm = ({ providers, csrfToken }) => {
   const handlePassChange = (e) => setPass(e.target.value);
 
   return (
-    <Flex direction="column" w="100vw" h="100vh" align="center" justify="center">
-      <Image marginBottom="8" src="/images/logo-horizontal.png" alt="Logo" height={50} />
-      <Flex
-        as="form"
-        width="100%"
-        maxWidth={360}
-        bg="gray.800"
-        p="5"
-        borderRadius={8}
-        flexDir="column"
-        onSubmit={onSigninWithCredentials}
-      >
-        <Stack spacing={4}>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <Input
-            name="email"
-            type="email"
-            label="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-
-          <FormLabel htmlFor="email">Password</FormLabel>
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            value={password}
-            onChange={handlePassChange}
-          />
-        </Stack>
-
-        <Button
-          mt={6}
-          colorScheme="pink"
-          size="lg"
-          type='submit'
+    <BackgroundAnimated height="400" width="400">
+      <Flex direction="column" w="100vw" h="100vh" align="center" justify="center">
+        <Image marginBottom="8" src="/images/logo-horizontal.png" alt="Logo" height={50} />
+        <Flex
+          as="form"
+          width="100%"
+          maxWidth={360}
+          bg="gray.800"
+          p="5"
+          borderRadius={8}
+          flexDir="column"
+          onSubmit={onSigninWithCredentials}
         >
-          {isLoading ? <Spinner size="sm" /> : 'Sign in'}
-        </Button>
+          <Stack spacing={4}>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input
+              name="email"
+              type="email"
+              label="Email"
+              value={email}
+              onChange={handleEmailChange}
+            />
 
-        <Flex width="100%" p="20px 0" justifyContent="center">
-          <a href="/auth/signup">Create Account</a>
+            <FormLabel htmlFor="email">Password</FormLabel>
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              value={password}
+              onChange={handlePassChange}
+            />
+          </Stack>
+
+          <Button
+            mt={6}
+            colorScheme="blue"
+            size="lg"
+            type='submit'
+          >
+            {isLoading ? <Spinner size="sm" /> : 'Sign in'}
+          </Button>
+
+          <Flex width="100%" p="20px 0" justifyContent="center">
+            <a href="/auth/signup">Create Account</a>
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </BackgroundAnimated >
   );
 };
 
