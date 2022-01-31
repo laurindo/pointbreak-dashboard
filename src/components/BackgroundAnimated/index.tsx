@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import NET from '@/lib/vanta.globe.min';
 import * as THREE from 'three';
 
-export default function Background({ width, height, children }) {
+import NET from '@/lib/vanta.globe.min';
+
+export default function BackgroundAnimated({ width, height, children }) {
   const [vantaEffect, setVantaEffect] = useState(0);
 
   const vantaRef = useRef(null);
@@ -13,6 +14,9 @@ export default function Background({ width, height, children }) {
         NET({
           THREE,
           el: vantaRef.current,
+          backgroundColor: '#161A1E',
+          color: '#0084EF',
+          points: 20.0,
         }),
       );
     }

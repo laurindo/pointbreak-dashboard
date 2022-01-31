@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react';
 
 import {PAIR_DEFAULT} from '@/constants/configs'
-import Background from '@/components/BackgroundAnimated'
+import BackgroundAnimated from '@/components/BackgroundAnimated'
 
 const LoginForm = ({ providers, csrfToken }) => {
   const router = useRouter();
@@ -58,7 +58,7 @@ const LoginForm = ({ providers, csrfToken }) => {
   const handlePassChange = (e) => setPass(e.target.value);
 
   return (
-    <Background height="400" width="400">
+    <BackgroundAnimated height="400" width="400">
       <Flex direction="column" w="100vw" h="100vh" align="center" justify="center">
         <Image marginBottom="8" src="/images/logo-horizontal.png" alt="Logo" height={50} />
         <Flex
@@ -93,7 +93,7 @@ const LoginForm = ({ providers, csrfToken }) => {
 
           <Button
             mt={6}
-            colorScheme="pink"
+            colorScheme="blue"
             size="lg"
             type='submit'
           >
@@ -105,7 +105,7 @@ const LoginForm = ({ providers, csrfToken }) => {
           </Flex>
         </Flex>
       </Flex>
-    </Background >
+    </BackgroundAnimated >
   );
 };
 
