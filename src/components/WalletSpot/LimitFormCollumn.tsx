@@ -5,7 +5,11 @@ import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 import { SliderWallet } from '@/components/Form/SliderWallet';
 import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
-import { reduceToFixedSizeWithRound, nSizeDecimal } from '@/utils/getDecimals';
+import {
+  reduceToFixedSizeWithRound,
+  nSizeDecimal,
+  reduceToFixedSize,
+} from '@/utils/getDecimals';
 
 interface LimitFormCollumnProps {
   criptoTransac: string;
@@ -33,7 +37,8 @@ export function LimitFormCollumn({
   amountSize,
   deal,
 }: LimitFormCollumnProps) {
-  let nPriceSize = priceSize && String(Number(priceSize)).split('.')[1].length;
+  const nPriceSize = priceSize && nSizeDecimal(priceSize);
+  const nAmountSize = amountSize && nSizeDecimal(amountSize);
   // Estado do Price
   const [price, setPrice] = useState(priceCryptoFrom);
   useEffect(() => {
@@ -57,15 +62,21 @@ export function LimitFormCollumn({
 
   // Editando o Amount
   const handleChangeAmount = (event: any) => {
-    if (parseFloat(event.target.value) > maxTransacAllowed) {
+    const value = event.target.value;
+    if (parseFloat(value) > maxTransacAllowed) {
       setAmount(String(maxTransacAllowed));
       setSliderValue((maxTransacAllowed * 100) / maxTransacAllowed);
       return;
     }
-    setAmount(event.target.value);
-    setSliderValue(
-      ((parseFloat(event.target.value) * 100) / maxTransacAllowed) | 0,
-    );
+    const sizeDecimalValue = value.split('.')[1] && value.split('.')[1].length;
+    if (nAmountSize && sizeDecimalValue && sizeDecimalValue > nAmountSize) {
+      const newValue = reduceToFixedSize(value, amountSize);
+      setAmount(newValue);
+      setSliderValue(((parseFloat(newValue) * 100) / maxTransacAllowed) | 0);
+    } else {
+      setAmount(value);
+      setSliderValue(((parseFloat(value) * 100) / maxTransacAllowed) | 0);
+    }
   };
 
   // Total Sell
@@ -84,9 +95,20 @@ export function LimitFormCollumn({
   // Slider
   const [sliderValue, setSliderValue] = useState(0);
   const handleChangeSlider = (event: any) => {
-    setAmount(String(maxTransacAllowed * (event / 100)));
-    console.log(maxTransacAllowed);
     setSliderValue(event);
+    const setValueAmount = String(maxTransacAllowed * (event / 100));
+    const sizeDecimalValueAmount =
+      setValueAmount.split('.')[1] && setValueAmount.split('.')[1].length;
+    if (
+      sizeDecimalValueAmount &&
+      nAmountSize &&
+      sizeDecimalValueAmount > nAmountSize
+    ) {
+      const newValue = reduceToFixedSize(setValueAmount, amountSize);
+      setAmount(newValue);
+    } else {
+      setAmount(setValueAmount);
+    }
   };
 
   return (
