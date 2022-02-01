@@ -5,7 +5,7 @@ import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 import { SliderWallet } from '@/components/Form/SliderWallet';
 import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
-import { sizeDecimal } from '@/utils/sizeDecimal';
+import { reduceToFixedSizeWithRound, nSizeDecimal } from '@/utils/getDecimals';
 
 interface LimitFormCollumnProps {
   criptoTransac: string;
@@ -16,6 +16,9 @@ interface LimitFormCollumnProps {
   maxTransacAllowed: number;
   priceSize: string;
   amountSize: string;
+  // maxPair: string;
+  // minPair: string;
+  // taxaBin: string;
   deal: 'sell' | 'buy';
 }
 
@@ -43,7 +46,7 @@ export function LimitFormCollumn({
       event.target.value.split('.')[1] &&
       event.target.value.split('.')[1].length;
     if (nPriceSize && nDecimalPrice && nDecimalPrice > nPriceSize) {
-      setPrice(sizeDecimal(event.target.value, priceSize));
+      setPrice(reduceToFixedSizeWithRound(event.target.value, priceSize));
     } else {
       setPrice(event.target.value);
     }
@@ -66,8 +69,16 @@ export function LimitFormCollumn({
   };
 
   // Total Sell
+  const defineSizeDecimalTotal =
+    priceSize && amountSize
+      ? nSizeDecimal(priceSize) + nSizeDecimal(amountSize)
+      : 0;
   const totalSell = amount
-    ? String((parseFloat(amount) * parseFloat(price)).toFixed(4))
+    ? String(
+        (parseFloat(amount) * parseFloat(price)).toFixed(
+          defineSizeDecimalTotal,
+        ),
+      )
     : '';
 
   // Slider
