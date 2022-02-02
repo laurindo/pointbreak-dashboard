@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
 import { SliderWallet } from '@/components/Form/SliderWallet';
 import { InputWalletSpot } from '@/components/Form/InputWalletSpot';
 
-import { sizeDecimal } from '@/utils/sizeDecimal';
+import {
+  reduceToFixedSizeWithRound,
+  nSizeDecimal,
+  reduceToFixedSize,
+} from '@/utils/getDecimals';
 
-interface LimitFormCollumnProps {
+interface LimitFormColumnProps {
   criptoTransac: string;
   criptoBase: string;
   available: string;
@@ -16,10 +20,13 @@ interface LimitFormCollumnProps {
   maxTransacAllowed: number;
   priceSize: string;
   amountSize: string;
+  // maxPair: string;
+  // minPair: string;
+  // taxaBin: string;
   deal: 'sell' | 'buy';
 }
 
-export function LimitFormCollumn({
+export function LimitFormColumn({
   criptoTransac,
   criptoBase,
   available,
@@ -29,8 +36,20 @@ export function LimitFormCollumn({
   priceSize,
   amountSize,
   deal,
-}: LimitFormCollumnProps) {
-  let nPriceSize = priceSize && String(Number(priceSize)).split('.')[1].length;
+}: LimitFormColumnProps) {
+  // Contagem de tamanho de casas decimais
+  const nPriceSize = useMemo(() => {
+    return priceSize && nSizeDecimal(priceSize);
+  }, [priceSize]);
+  const nAmountSize = useMemo(() => {
+    return amountSize && nSizeDecimal(amountSize);
+  }, [amountSize]);
+  const defineSizeDecimalTotal = useMemo(() => {
+    return priceSize && amountSize
+      ? nSizeDecimal(priceSize) + nSizeDecimal(amountSize)
+      : 0;
+  }, [priceSize, amountSize]);
+
   // Estado do Price
   const [price, setPrice] = useState(priceCryptoFrom);
   useEffect(() => {
@@ -43,7 +62,7 @@ export function LimitFormCollumn({
       event.target.value.split('.')[1] &&
       event.target.value.split('.')[1].length;
     if (nPriceSize && nDecimalPrice && nDecimalPrice > nPriceSize) {
-      setPrice(sizeDecimal(event.target.value, priceSize));
+      setPrice(reduceToFixedSizeWithRound(event.target.value, priceSize));
     } else {
       setPrice(event.target.value);
     }
@@ -54,28 +73,49 @@ export function LimitFormCollumn({
 
   // Editando o Amount
   const handleChangeAmount = (event: any) => {
-    if (parseFloat(event.target.value) > maxTransacAllowed) {
+    const value = event.target.value;
+    if (parseFloat(value) > maxTransacAllowed) {
       setAmount(String(maxTransacAllowed));
       setSliderValue((maxTransacAllowed * 100) / maxTransacAllowed);
       return;
     }
-    setAmount(event.target.value);
-    setSliderValue(
-      ((parseFloat(event.target.value) * 100) / maxTransacAllowed) | 0,
-    );
+    const sizeDecimalValue = value.split('.')[1] && value.split('.')[1].length;
+    if (nAmountSize && sizeDecimalValue && sizeDecimalValue > nAmountSize) {
+      const newValue = reduceToFixedSize(value, amountSize);
+      setAmount(newValue);
+      setSliderValue(((parseFloat(newValue) * 100) / maxTransacAllowed) | 0);
+    } else {
+      setAmount(value);
+      setSliderValue(((parseFloat(value) * 100) / maxTransacAllowed) | 0);
+    }
   };
 
   // Total Sell
   const totalSell = amount
-    ? String((parseFloat(amount) * parseFloat(price)).toFixed(4))
+    ? String(
+        (parseFloat(amount) * parseFloat(price)).toFixed(
+          defineSizeDecimalTotal,
+        ),
+      )
     : '';
 
   // Slider
   const [sliderValue, setSliderValue] = useState(0);
   const handleChangeSlider = (event: any) => {
-    setAmount(String(maxTransacAllowed * (event / 100)));
-    console.log(maxTransacAllowed);
     setSliderValue(event);
+    const setValueAmount = String(maxTransacAllowed * (event / 100));
+    const sizeDecimalValueAmount =
+      setValueAmount.split('.')[1] && setValueAmount.split('.')[1].length;
+    if (
+      sizeDecimalValueAmount &&
+      nAmountSize &&
+      sizeDecimalValueAmount > nAmountSize
+    ) {
+      const newValue = reduceToFixedSize(setValueAmount, amountSize);
+      setAmount(newValue);
+    } else {
+      setAmount(setValueAmount);
+    }
   };
 
   return (
