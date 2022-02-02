@@ -10,7 +10,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 
-import { LimitFormCollumn } from './LimitFormCollumn';
+import { LimitFormColumn } from './LimitFormColumn';
 import { MarketFormCollumn } from './MarketFormCollumn';
 import { StopLimitFormCollumn } from './StopLimitFormCollumn';
 import { OCOFormCollumn } from './OCOFormCollumn';
@@ -110,7 +110,7 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
         <TabPanels>
           <TabPanel>
             <HStack spacing={6}>
-              <LimitFormCollumn
+              <LimitFormColumn
                 criptoTransac={criptoTransac} // base asset
                 criptoBase={criptoBase} // quote asset
                 available={availableCryptoTransac} // actual amount criptoFrom
@@ -121,7 +121,7 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
                 amountSize={priceSelectedPair.stepSize}
                 deal="buy"
               />
-              <LimitFormCollumn
+              <LimitFormColumn
                 criptoTransac={criptoTransac} // base asset
                 criptoBase={criptoBase} // quote asset
                 available={availableCryptoBase} // actual amount criptoTo

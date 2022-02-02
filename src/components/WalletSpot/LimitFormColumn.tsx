@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { ButtonWalletSpot } from '@/components/Form/ButtonWalletSpot';
@@ -11,7 +11,7 @@ import {
   reduceToFixedSize,
 } from '@/utils/getDecimals';
 
-interface LimitFormCollumnProps {
+interface LimitFormColumnProps {
   criptoTransac: string;
   criptoBase: string;
   available: string;
@@ -26,7 +26,7 @@ interface LimitFormCollumnProps {
   deal: 'sell' | 'buy';
 }
 
-export function LimitFormCollumn({
+export function LimitFormColumn({
   criptoTransac,
   criptoBase,
   available,
@@ -36,9 +36,20 @@ export function LimitFormCollumn({
   priceSize,
   amountSize,
   deal,
-}: LimitFormCollumnProps) {
-  const nPriceSize = priceSize && nSizeDecimal(priceSize);
-  const nAmountSize = amountSize && nSizeDecimal(amountSize);
+}: LimitFormColumnProps) {
+  // Contagem de tamanho de casas decimais
+  const nPriceSize = useMemo(() => {
+    return priceSize && nSizeDecimal(priceSize);
+  }, [priceSize]);
+  const nAmountSize = useMemo(() => {
+    return amountSize && nSizeDecimal(amountSize);
+  }, [amountSize]);
+  const defineSizeDecimalTotal = useMemo(() => {
+    return priceSize && amountSize
+      ? nSizeDecimal(priceSize) + nSizeDecimal(amountSize)
+      : 0;
+  }, [priceSize, amountSize]);
+
   // Estado do Price
   const [price, setPrice] = useState(priceCryptoFrom);
   useEffect(() => {
@@ -80,10 +91,6 @@ export function LimitFormCollumn({
   };
 
   // Total Sell
-  const defineSizeDecimalTotal =
-    priceSize && amountSize
-      ? nSizeDecimal(priceSize) + nSizeDecimal(amountSize)
-      : 0;
   const totalSell = amount
     ? String(
         (parseFloat(amount) * parseFloat(price)).toFixed(
