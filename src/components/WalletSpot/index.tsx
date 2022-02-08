@@ -96,10 +96,10 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
           <Tab fontSize="small" _focus={{ outline: '0' }}>
             Limite
           </Tab>
-          {/* <Tab fontSize="small" _focus={{ outline: '0' }}>
+          <Tab fontSize="small" _focus={{ outline: '0' }}>
             Market Order
           </Tab>
-          <Tab fontSize="small" _focus={{ outline: '0' }}>
+          {/* <Tab fontSize="small" _focus={{ outline: '0' }}>
             Stop-Limit
           </Tab>
           <Tab fontSize="small" _focus={{ outline: '0' }}>
@@ -134,23 +134,33 @@ export function WalletSpot({ pair, pairName }: WalletSpotProps) {
               />
             </HStack>
           </TabPanel>
-          {/* <TabPanel>
+          <TabPanel>
             <HStack spacing={6}>
               <MarketFormCollumn
-                criptoFrom="ETH"
-                criptoTo="EOS"
-                available="0.00000000"
+                criptoTransac={criptoTransac}
+                criptoBase={criptoBase}
+                available={availableCryptoTransac}
+                availableAssetName={criptoTransac}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
+                priceCryptoFrom={priceCryptoBaseInCryptoTransac}
+                maxTransacAllowed={Number(maxTransacAllowedBuy)}
                 deal="buy"
               />
               <MarketFormCollumn
-                criptoFrom="ETH"
-                criptoTo="EOS"
-                available="0.00000000"
+                criptoTransac={criptoTransac}
+                criptoBase={criptoBase}
+                available={availableCryptoBase}
+                availableAssetName={criptoBase}
+                priceSize={priceSelectedPair.tickSize}
+                amountSize={priceSelectedPair.stepSize}
+                priceCryptoFrom={priceCryptoBaseInCryptoTransac}
+                maxTransacAllowed={Number(maxTransacAllowedSell)}
                 deal="sell"
               />
             </HStack>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <HStack spacing={6}>
               <StopLimitFormCollumn
                 criptoFrom="ETH"
