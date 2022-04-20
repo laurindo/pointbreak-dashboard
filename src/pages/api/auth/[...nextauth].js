@@ -39,9 +39,10 @@ export default NextAuth({
         email: {
           label: 'Email',
           type: 'text',
+          value: 'demo@domain.com',
           placeholder: 'email@domain.com',
         },
-        password: { id: 'password', label: 'Password', type: 'password' },
+        password: { id: 'password', label: 'Password', type: 'password', value: '123456' },
       },
       async authorize({ email, password }) {
         try {
