@@ -6,7 +6,7 @@
 Exchange application to get real time values from Binance
 
 ## DEMO
-link
+[Visit PointBreak App](https://pointbreak-dashboard-fxo5v1ofx-dslaurindo.vercel.app/auth/signin)
 
 ### Technologies
 * NextJS
