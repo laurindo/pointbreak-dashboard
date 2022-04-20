@@ -10,7 +10,10 @@ import {
   FormLabel,
   Spinner,
   useToast,
+  Image
 } from '@chakra-ui/react';
+
+import BackgroundAnimated from '@/components/BackgroundAnimated'
 
 const Signup = () => {
   const router = useRouter();
@@ -63,59 +66,62 @@ const Signup = () => {
   const handleCPassChange = (e) => setCPassword(e.target.value);
 
   return (
-    <Flex w="100vw" h="100vh" align="center" justify="center">
-      <Flex
-        as="form"
-        width="100%"
-        maxWidth={360}
-        bg="gray.800"
-        p="8"
-        borderRadius={8}
-        flexDir="column"
-      >
-        <Stack spacing={4}>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <Input
-            name="email"
-            type="email"
-            label="Email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            value={password}
-            onChange={handlePassChange}
-          />
-
-          <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
-          <Input
-            name="cPassword"
-            type="password"
-            label="Confirm Password"
-            value={cPassword}
-            onChange={handleCPassChange}
-          />
-        </Stack>
-
-        <Button
-          mt={6}
-          colorScheme="pink"
-          size="lg"
-          onClick={onSigninWithCredentials}
+    <BackgroundAnimated height="400" width="400">
+      <Flex direction="column" w="100vw" h="100vh" align="center" justify="center">
+        <Image marginBottom="8" src="/images/logo-horizontal.png" alt="Logo" height={50} />
+        <Flex
+          as="form"
+          width="100%"
+          maxWidth={360}
+          bg="gray.800"
+          p="5"
+          borderRadius={8}
+          flexDir="column"
         >
-          {isLoading ? <Spinner size="sm" /> : 'Sign up'}
-        </Button>
+          <Stack spacing={4}>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input
+              name="email"
+              type="email"
+              label="Email"
+              value={email}
+              onChange={handleEmailChange}
+            />
 
-        <Flex width="100%" p="20px 0" justifyContent="center">
-          <a href="/auth/signin">Sign In</a>
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              value={password}
+              onChange={handlePassChange}
+            />
+
+            <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+            <Input
+              name="cPassword"
+              type="password"
+              label="Confirm Password"
+              value={cPassword}
+              onChange={handleCPassChange}
+            />
+          </Stack>
+
+          <Button
+            mt={6}
+            colorScheme="blue"
+            size="lg"
+            onClick={onSigninWithCredentials}
+          >
+            {isLoading ? <Spinner size="sm" /> : 'Sign up'}
+          </Button>
+
+          <Flex width="100%" p="20px 0" justifyContent="center">
+            <a href="/auth/signin">Sign In</a>
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </BackgroundAnimated>
   );
 };
 
