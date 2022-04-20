@@ -108,7 +108,7 @@ export default function WalletModal({
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
     if (
       conn instanceof WalletConnectConnector &&
-      conn.walletConnectProvider?.wc?.uri
+      conn?.walletConnectProvider?.wc?.uri
     ) {
       conn.walletConnectProvider = undefined;
     }
