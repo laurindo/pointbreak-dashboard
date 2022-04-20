@@ -27,8 +27,8 @@ import BackgroundAnimated from '@/components/BackgroundAnimated'
 const LoginForm = ({ providers, csrfToken }) => {
   const router = useRouter();
   const toast = useToast();
-  const [email, setEmail] = useState('');
-  const [password, setPass] = useState('');
+  const [email, setEmail] = useState('demo@domain.com');
+  const [password, setPass] = useState('123456');
   const [isLoading, setLoading] = useState(false);
   const [isError] = useState(false);
 
