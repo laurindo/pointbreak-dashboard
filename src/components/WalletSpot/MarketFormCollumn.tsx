@@ -101,7 +101,7 @@ export function MarketFormCollumn({
   return (
     <Flex direction="column" flex="1 1 0%">
       <Flex justifyContent="space-between" fontSize="small" color="gray.300">
-        <Text>Disponível</Text>
+        <Text>Available</Text>
         <Text>
           {available} {availableAssetName}
         </Text>

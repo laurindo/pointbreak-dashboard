@@ -46,7 +46,7 @@ export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Variação em 24h
+                Change 24h
               </Text>
               <Text color="red.500" fontSize="small">
                 {tickerPrice?.p} {tickerPrice?.P}
@@ -57,7 +57,7 @@ export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Máximo em 24h
+                Max in 24h
               </Text>
               <Text fontSize="small">
                 {tickerPrice?.h ? Number(tickerPrice.h).toFixed(2) : 0}
@@ -68,7 +68,7 @@ export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Mínimo em 24h
+                Min 24h
               </Text>
               <Text fontSize="small">
                 {tickerPrice?.l ? Number(tickerPrice.l).toFixed(2) : 0}
@@ -79,7 +79,7 @@ export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Volume em 24h({symbol[0]})
+                Volume in 24h({symbol[0]})
               </Text>
               <Text fontSize="small">{tickerPrice?.v}</Text>
             </Box>
@@ -88,7 +88,7 @@ export function HeaderPairs({ pair, pairName }: HeaderPairsProps) {
           <Flex align="center">
             <Box textAlign="center">
               <Text color="gray.300" fontSize="small">
-                Volume 24h({symbol[1]})
+                Volume in 24h({symbol[1]})
               </Text>
               <Text fontSize="small">{tickerPrice?.q}</Text>
             </Box>
