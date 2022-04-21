@@ -44,7 +44,7 @@ export function Header() {
 
       <Box as="nav" height="5" marginLeft="5">
         <ItemMenuNav path={urlHomeDefault}>Home</ItemMenuNav>
-        <ItemMenuNav path="/keys">Controle de Chaves</ItemMenuNav>
+        <ItemMenuNav path="/keys">API Key Control</ItemMenuNav>
       </Box>
 
       <Flex align="center" ml="auto">
@@ -98,7 +98,6 @@ export function Header() {
             <Box>
               {library && library.provider.isMetaMask && (
                 <div className="hidden sm:inline-block">
-                  aqui
                   <Web3Network />
                 </div>
               )}

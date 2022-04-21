@@ -25,10 +25,10 @@ export function OrderBook() {
 
       <Flex margin="2" fontSize="small" color="gray.300">
         <Flex flex="1 1 0%" justifyContent="flex-start">
-          Preço(USDT)
+          Price(USDT)
         </Flex>
         <Flex flex="1 1 0%" justifyContent="flex-end">
-          Quantia(BTC)
+          Amount(BTC)
         </Flex>
         <Flex flex="1 1 0%" justifyContent="flex-end">
           Total

@@ -91,7 +91,7 @@ export default function Keys({ session, assetsFromDB }) {
             />
             <Flex justifyContent="flex-end">
               <Button type="submit" colorScheme="green" paddingX="10">
-                Salvar
+                Save
               </Button>
               {connectionCheck && (
                 <Button
@@ -101,7 +101,7 @@ export default function Keys({ session, assetsFromDB }) {
                   ml="10px"
                   onClick={handlValidateKey}
                 >
-                  Validar Chave
+                  Validate Key
                 </Button>
               )}
             </Flex>
@@ -111,16 +111,16 @@ export default function Keys({ session, assetsFromDB }) {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th>Chave Pública</Th>
-                <Th>Chave Privada</Th>
-                <Th>Ações</Th>
+                <Th>Public Key</Th>
+                <Th>Secret Key</Th>
+                <Th>Actions</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr>
                 <Td>mcu&f=$6zs(66bf3fbf6#_*9reqh6k(rtdwqnns2149uqg*fmj</Td>
                 <Td>****************</Td>
-                <Td>Editar | Excluir</Td>
+                <Td>Edit | Delete</Td>
               </Tr>
             </Tbody>
           </Table>

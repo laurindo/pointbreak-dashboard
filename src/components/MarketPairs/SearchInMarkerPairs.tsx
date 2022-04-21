@@ -38,7 +38,7 @@ export function SearchInMarkerPairs() {
           children={<Icon as={RiSearchLine} fontSize="20" />}
         />
         <Input
-          placeholder="Pesquisar"
+          placeholder="Search"
           borderWidth={0}
           bgColor="gray.800"
           onChange={handleQuery}

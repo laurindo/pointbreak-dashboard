@@ -9,5 +9,5 @@ const query = gql`
 `;
 
 export const validateBinanceKey = async (email) => {
-  return request(process.env.NEXT_PUBLIC_SERVER_URL_LOCAL, query, { email });
+  return request(process.env.NEXT_PUBLIC_SERVER_URL, query, { email });
 };
