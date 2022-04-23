@@ -1,12 +1,13 @@
 ![image](https://user-images.githubusercontent.com/2501144/164255037-2fb0a29e-4c86-4a51-9814-04db83cd3f63.png)
-![image](https://user-images.githubusercontent.com/2501144/164255557-8fd96965-a9e6-45cf-b38b-900f2d536401.png)
+![Captura de tela de 2022-04-23 10-33-17](https://user-images.githubusercontent.com/2501144/164896823-86d855b0-5362-4a9a-b806-37ca8c2d6919.png)
+
 
 
 # PointBreak Client Side
 Exchange application to get real time values from Binance
 
 ## DEMO
-[Visit PointBreak App](https://pointbreak-dashboard-fxo5v1ofx-dslaurindo.vercel.app/auth/signin)
+[Visit PointBreak App](https://pointbreak-dashboard-cs0wrq7fe-dslaurindo.vercel.app/auth/signin)
 
 ### Technologies
 * NextJS
@@ -15,6 +16,8 @@ Exchange application to get real time values from Binance
 * Next-Auth
 * SWR
 * Websocket
+* GitHub Actions
+* Vercel
 
 #### Installation
 
