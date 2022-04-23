@@ -9,9 +9,11 @@ import {
   Th,
   Flex,
   Box,
+  Stack,
+  Skeleton
 } from '@chakra-ui/react';
-import { useStoreState } from 'easy-peasy';
-import { useMemo } from 'react';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
@@ -33,6 +35,8 @@ const scrollBarCss = {
 
 export function TableToCript({ data, height = '450px' }) {
   const query = useStoreState((state: any) => state.query);
+  const favoritesPairs = useStoreState((state: any) => state.favoritesPairs);
+  const setFavoritePairs = useStoreActions((action: any) => action.setFavoritePairs);
 
   const filteredData = useMemo(
     () =>
@@ -42,6 +46,22 @@ export function TableToCript({ data, height = '450px' }) {
       }),
     [data, query],
   );
+
+  const renderSkeleton = useCallback(() => {
+    return (
+      <Td>
+        <Stack>
+          {[...new Array(10)].map((_, idx) => <Skeleton key={idx} height='20px' />)}
+        </Stack>
+      </Td>
+    );
+  }, [])
+
+  const handleFavorite = useCallback((pair) => {
+    setFavoritePairs(pair)
+  }, []);
+
+  const isFavoritePair = (pair) => favoritesPairs?.filter(fp => fp.pair === pair.pair).length || 0;
 
   return (
     <Box height={height} overflowY="scroll" css={scrollBarCss}>
@@ -68,21 +88,35 @@ export function TableToCript({ data, height = '450px' }) {
           </Tr>
         </Thead>
         <Tbody>
-          {filteredData.map((d) => (
-            <Link href={`/trade/${d.pair.replace('/', '_')}`} key={d.key}>
-              <Tr>
-                <Td cursor="pointer">
-                  <Flex>
-                    <Icon as={FaStar} mr="5px" />
-                    <Text fontSize="xs">{d.pair}</Text>
-                  </Flex>
-                </Td>
-                <Td isNumeric>
-                  <Text fontSize="xs">{d.price}</Text>
-                </Td>
-              </Tr>
-            </Link>
-          ))}
+          {filteredData.length === 0 ? (
+            <Tr>
+              {renderSkeleton()}
+              {renderSkeleton()}
+            </Tr>
+          ) : (
+            <>
+              {filteredData.map((d) => (
+                <Link href={`/trade/${d.pair.replace('/', '_')}`} key={d.key}>
+                  <Tr>
+                    <Td cursor="pointer">
+                      <Flex>
+                        <Icon
+                          as={FaStar}
+                          color={isFavoritePair(d) ? "yellow" : "white"}
+                          mr="5px"
+                          onClick={() => handleFavorite(d)}
+                        />
+                        <Text fontSize="xs">{d.pair}</Text>
+                      </Flex>
+                    </Td>
+                    <Td isNumeric>
+                      <Text fontSize="xs">{d.price}</Text>
+                    </Td>
+                  </Tr>
+                </Link>
+              ))}
+            </>
+          )}
         </Tbody>
       </Table>
     </Box>
