@@ -70,12 +70,12 @@ export function MarketPairs() {
     if (favoritePairs && favoritePairs.length && prices && prices.length) {
       const favorites = favoritePairs.map((pair, index) => {
         const price = prices
-          ? prices.find((price) => price.symbol === pair)
+          ? prices.find((price) => price.symbol === pair.pair.replace("/", ""))
           : 0;
         return {
           key: index,
-          pair,
-          price: price.price,
+          pair: pair.pair,
+          price: price?.lastPrice,
           change: '-',
         };
       });
@@ -89,7 +89,7 @@ export function MarketPairs() {
       const dataBusd = busdPairs.map((busdPair, index) => ({
         key: index,
         pair: busdPair.pair,
-        price: busdPair.price,
+        price: busdPair.lastPrice,
         change: '-',
       }));
       setDataBusdPairs(dataBusd);
@@ -102,7 +102,7 @@ export function MarketPairs() {
       const dataBtc = btcPairs.map((btcPair, index) => ({
         key: index,
         pair: btcPair.pair,
-        price: btcPair.price,
+        price: btcPair.lastPrice,
         change: '-',
       }));
       setDataBtcPairs(dataBtc);
@@ -115,7 +115,7 @@ export function MarketPairs() {
       const dataEth = ethPairs.map((ethPair, index) => ({
         key: index,
         pair: ethPair.pair,
-        price: ethPair.price,
+        price: ethPair.lastPrice,
         change: '-',
       }));
       setDataEthPairs(dataEth);
@@ -128,7 +128,7 @@ export function MarketPairs() {
       const dataUsdt = usdtPairs.map((usdtPair, index) => ({
         key: index,
         pair: usdtPair.pair,
-        price: usdtPair.price,
+        price: usdtPair.lastPrice,
         change: '-',
       }));
       setDataUsdtPairs(dataUsdt);

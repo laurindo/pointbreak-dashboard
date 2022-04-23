@@ -14,9 +14,8 @@ const setPairs = action((state, payload) => {
 });
 
 const setFavoritePairs = action((state, payload) => {
-  // debugger
-  const exists = state.favoritesPairs.some((pair) => pair === payload);
-  const newPairs = state.favoritesPairs.filter((pair) => pair !== payload);
+  const exists = state.favoritesPairs.some((pair) => pair.pair === payload.pair);
+  const newPairs = state.favoritesPairs.filter((pair) => pair.pair !== payload.pair);
   const result = exists ? [...newPairs] : [...state.favoritesPairs, payload];
   state.favoritesPairs = result;
 });

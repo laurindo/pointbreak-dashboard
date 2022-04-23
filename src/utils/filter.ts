@@ -18,7 +18,7 @@ type ResponseJoinSymbols = {
   name: String;
   quoteAsset: String;
   pair: String;
-  price: String;
+  lastPrice: String;
   symbol: String;
 };
 
