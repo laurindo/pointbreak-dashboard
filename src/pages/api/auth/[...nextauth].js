@@ -26,7 +26,7 @@ const callbacks = {
 
 export default NextAuth({
   debug: true,
-  adapter: MongoDBAdapter(clientPromise),
+  //adapter: MongoDBAdapter(clientPromise),
   callbacks,
   pages: {
     error: '/auth/signin',
@@ -42,11 +42,16 @@ export default NextAuth({
           value: 'demo@domain.com',
           placeholder: 'email@domain.com',
         },
-        password: { id: 'password', label: 'Password', type: 'password', value: '123456' },
+        password: {
+          id: 'password',
+          label: 'Password',
+          type: 'password',
+          value: '123456',
+        },
       },
       async authorize({ email, password }) {
         try {
-          const client = await MongoClient.connect(process.env.MONGODB_URI, {
+          /*const client = await MongoClient.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
           });
@@ -71,7 +76,9 @@ export default NextAuth({
 
           //Else send success response
           client.close();
-          return { email: result.email };
+          return { email: result.email };*/
+
+          return { email: 'demo@domain.com' };
         } catch (err) {
           console.log(err);
           throw new Error(err);
